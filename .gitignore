@@ -1,0 +1,22 @@
+# Ambiente virtual Python
+venv/
+.venv/
+
+# Arquivos temporários do Python
+__pycache__/
+*.py[cod]
+
+# Arquivos de configuração local
+.env
+.env.*
+!.env.example
+
+# Configurações pessoais do VS Code
+.vscode/
+
+# Arquivos temporários do Windows
+Thumbs.db
+Desktop.ini
+
+# Arquivos de log
+*.log
