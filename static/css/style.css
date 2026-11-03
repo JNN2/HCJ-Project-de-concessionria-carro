@@ -1,0 +1,325 @@
+/* =========================================================
+   HCJ MOTORS | CSS PRINCIPAL OTIMIZADO
+   Flask + Jinja2 | Homepage responsiva | Dark / Sakura
+   Estrutura esperada: .header, .hero, .hero-content,
+   .hero-benefits, .benefits-content e .footer
+   ========================================================= */
+
+/* 01. CORES, TIPOGRAFIA E MEDIDAS */
+:root {
+    --bg-dark: #0B0B0D;
+    --surface-dark: #141417;
+    --card-dark: #1F1F24;
+    --border-dark: #303036;
+    --bg-light: #FAF8FC;
+    --surface-light: #FFFFFF;
+    --card-light: #F5F3F7;
+    --border-light: #E5E0E8;
+    --primary: #E10600;
+    --primary-hover: #B80000;
+    --secondary: #B80000;
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0A0A8;
+    --text-dark: #1A1A1F;
+    --text-muted: #6B7280;
+    --sakura: #FFDCE5;
+    --sakura-dark: #F4A7B9;
+    --font-title: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --transition: .3s ease;
+    --container-width: 1320px;
+    --header-height: 62px;
+    --radius-pill: 999px;
+}
+
+/* 02. TEMAS (dark é o padrão caso o atributo não exista) */
+:root, [data-theme="dark"] {
+    --bg: var(--bg-dark);
+    --surface: var(--surface-dark);
+    --card: var(--card-dark);
+    --border: var(--border-dark);
+    --text: var(--text-primary);
+    --text-muted-current: var(--text-secondary);
+    --header-bg: #09090B;
+}
+[data-theme="light"] {
+    --bg: var(--bg-light);
+    --surface: var(--surface-light);
+    --card: var(--card-light);
+    --border: var(--border-light);
+    --text: var(--text-dark);
+    --text-muted-current: var(--text-muted);
+    --header-bg: #FFFFFF;
+}
+
+/* 03. BASE */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    transition: background-color var(--transition), color var(--transition);
+}
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+img { display: block; max-width: 100%; }
+.container { width: min(var(--container-width), 92%); margin-inline: auto; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+/* 04. CABEÇALHO */
+.header {
+    position: relative;
+    z-index: 20;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
+}
+.header-content {
+    min-height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+.logo { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo img { width: 56px; height: 52px; object-fit: contain; }
+.logo-dark, .logo-light { display: none; }
+:root .logo-dark, [data-theme="dark"] .logo-dark { display: block; }
+[data-theme="light"] .logo-dark { display: none; }
+[data-theme="light"] .logo-light { display: block; }
+.logo-name { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.logo-name strong { font: 800 23px var(--font-title); letter-spacing: 2px; color: var(--primary); }
+.logo-name small { margin-top: 4px; font-size: 8px; letter-spacing: 5px; color: var(--text); }
+
+/* 05. NAVEGAÇÃO E AÇÕES */
+.navbar { display: flex; align-items: center; justify-content: center; gap: 24px; }
+.navbar a, .navbar .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: var(--header-height);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color var(--transition);
+}
+.navbar a i { font-size: 13px; }
+.navbar a:hover, .navbar a.active, .navbar .nav-link.active { color: var(--primary); }
+.navbar a.active::after, .navbar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background: var(--primary);
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.header-actions { display: flex; align-items: center; gap: 9px; }
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: var(--text);
+    transition: color var(--transition), border-color var(--transition);
+}
+.icon-button:hover { color: var(--primary); border-color: var(--border); }
+.login-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 8px 19px;
+    border-radius: var(--radius-pill);
+    background: var(--primary);
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 700;
+}
+.login-button:hover { background: var(--primary-hover); }
+
+/* 06. HERO: CONTEÚDO ACIMA, BENEFÍCIOS NA BASE DA IMAGEM
+   Importante: .hero-benefits deve estar DENTRO de .hero,
+   depois de .hero-content, e não dentro de .hero-content. */
+.hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: max(620px, calc(100svh - var(--header-height) - 62px));
+    overflow: hidden;
+}
+.hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: opacity .45s ease;
+}
+.hero-dark { background-image: url('../images/hero-dark.png'); opacity: 1; }
+.hero-light { background-image: url('../images/hero-light.png'); opacity: 0; }
+[data-theme="light"] .hero-dark { opacity: 0; }
+[data-theme="light"] .hero-light { opacity: 1; }
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.24) 42%, transparent 78%);
+}
+[data-theme="light"] .hero::before {
+    background: linear-gradient(90deg, rgba(255,255,255,.82) 0%, rgba(255,255,255,.20) 43%, transparent 80%);
+}
+
+/* 07. TEXTO DO HERO - CENTRALIZADO NO CONTAINER, NÃO NA TELA */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: min(var(--container-width), 92%);
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    margin-inline: auto;
+    padding: 64px 0 45px;
+}
+.hero-text { width: 100%; max-width: 380px; }
+.hero h1 {
+    margin: 0 0 12px;
+    font: italic 800 clamp(38px, 4vw, 56px)/1.1 var(--font-title);
+    letter-spacing: -.04em;
+}
+.hero h1 span { color: var(--primary); }
+.hero h2 {
+    margin: 0 0 13px;
+    font: 500 clamp(23px, 2.4vw, 30px)/1.25 var(--font-title);
+}
+.hero p { max-width: 330px; margin: 0 0 24px; font-size: 13px; line-height: 1.6; }
+[data-theme="dark"] .hero-text { color: #FFF; }
+[data-theme="light"] .hero-text { color: var(--text-dark); }
+.hero-buttons { display: flex; align-items: center; flex-wrap: wrap; gap: 11px; }
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 700;
+    transition: transform var(--transition), background-color var(--transition);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--primary); color: #FFF; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-outline { border-color: currentColor; color: inherit; background: rgba(0,0,0,.08); }
+.btn-outline:hover { background: var(--primary); color: #FFF; border-color: var(--primary); }
+
+/* 08. BENEFÍCIOS: UMA ÚNICA FAIXA NA PARTE INFERIOR DO HERO */
+.hero-benefits {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    width: 100%;
+    margin-top: auto;
+    padding: 25px 0 30px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.60) 100%);
+}
+.hero-benefits .benefits-content {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    gap: 18px;
+    width: min(1080px, 92%);
+    max-width: 1080px;
+    margin-inline: auto;
+}
+.hero-benefits .benefit-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    color: #FFF;
+}
+.hero-benefits .benefit-item i { flex-shrink: 0; font-size: 27px; color: #FFF; }
+.hero-benefits .benefit-item span { font-size: 12px; line-height: 1.35; font-weight: 500; }
+[data-theme="light"] .hero-benefits {
+    background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,.88) 100%);
+}
+[data-theme="light"] .hero-benefits .benefit-item,
+[data-theme="light"] .hero-benefits .benefit-item i { color: var(--text-dark); }
+
+/* 09. RODAPÉ COM LINHAS DECORATIVAS */
+.footer { padding: 22px 12px; background: var(--bg); color: var(--text-muted-current); text-align: center; }
+.footer p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0;
+    font-size: 11px;
+}
+.footer p::before, .footer p::after {
+    content: '';
+    display: block;
+    width: 42px;
+    height: 1px;
+    background: var(--border);
+}
+
+/* 10. TELAS MÉDIAS */
+@media (max-width: 900px) {
+    .header-content { flex-wrap: wrap; padding-top: 8px; gap: 10px; }
+    .navbar { order: 3; width: 100%; gap: 20px; }
+    .navbar a, .navbar .nav-link { min-height: 40px; }
+    .hero { min-height: 700px; }
+    .hero-content { padding: 55px 0 45px; }
+    .hero-benefits .benefits-content { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; }
+}
+
+/* 11. CELULARES */
+@media (max-width: 600px) {
+    .container { width: 92%; }
+    .logo img { width: 48px; height: 45px; }
+    .logo-name strong { font-size: 19px; }
+    .header-actions { gap: 4px; }
+    .login-button { padding: 8px 13px; }
+    .navbar { justify-content: space-between; gap: 8px; overflow-x: auto; }
+    .navbar a, .navbar .nav-link { font-size: 10px; gap: 4px; }
+    .hero { min-height: 760px; }
+    .hero-background { background-position: 61% center; }
+    .hero-content { width: 90%; align-items: flex-start; padding: 65px 0 32px; }
+    .hero-text { max-width: 315px; }
+    .hero h1 { font-size: 40px; }
+    .hero h2 { font-size: 24px; }
+    .hero p { font-size: 12px; }
+    .btn { padding: 10px 14px; font-size: 11px; }
+    .hero::before { background: linear-gradient(180deg, rgba(0,0,0,.78), rgba(0,0,0,.24) 65%, transparent); }
+    [data-theme="light"] .hero::before { background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.25) 65%, transparent); }
+    .hero-benefits { padding: 20px 0 25px; }
+    .hero-benefits .benefits-content { width: 90%; gap: 18px 10px; }
+    .hero-benefits .benefit-item { justify-content: flex-start; gap: 9px; }
+    .hero-benefits .benefit-item i { font-size: 22px; }
+    .hero-benefits .benefit-item span { font-size: 10px; }
+    .footer p { font-size: 10px; gap: 8px; }
+    .footer p::before, .footer p::after { width: 24px; }
+}
+
+/* 12. ACESSIBILIDADE */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

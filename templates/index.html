@@ -1,20 +1,70 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Veículos</title>
-</head>
-<body>
 
-    <header>
-        <h1>Catálogo de Veículos</h1>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <h2>Encontre seu próximo veículo</h2>
-        <p>Consulte os veículos disponíveis em nosso catálogo.</p>
-    </main>
+{% block title %}
+HCJ Motors | Início
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<!-- BANNER PRINCIPAL -->
+<section class="hero">
+    <!-- Imagem de fundo do tema escuro -->
+    <div class="hero-background hero-dark"></div>
+    <!-- Imagem de fundo do tema claro -->
+    <div class="hero-background hero-light"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="container hero-content">
+        <div class="hero-text">
+            <h1>HCJ <span>Motors</span></h1>
+            <h2>Seu próximo carro está aqui.</h2>
+            <p>
+                Conquiste a estrada com qualidade,
+                segurança e o melhor atendimento.
+            </p>
+            <div class="hero-buttons">
+                <a href="/catalogo"
+                   class="btn btn-primary">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Explorar Catálogo
+                </a>
+                <a href="/cadastrar-veiculo"
+                   class="btn btn-outline">
+                    Cadastrar Veículo
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BENEFÍCIOS DENTRO DO BANNER -->
+    <div class="hero-benefits">
+        <div class="container benefits-content">
+            <div class="benefit-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Veículos<br>Verificados</span>
+            </div>
+
+            <div class="benefit-item">
+                <i class="fa-solid fa-handshake"></i>
+                <span>Compra<br>Segura</span>
+            </div>
+
+            <div class="benefit-item">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Atendimento<br>Rápido</span>
+            </div>
+
+            <div class="benefit-item">
+                <i class="fa-regular fa-star"></i>
+                <span>As Melhores<br>Ofertas</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
