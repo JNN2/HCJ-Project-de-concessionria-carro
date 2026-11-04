@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}
+HCJ Motors | Catálogo de Veículos
+{% endblock %}
+{% block content %}
+<section class="catalogo">
+    <div class="container">
+
+        <h1>Catálogo de Veículos</h1>
+        <p>Encontre o carro perfeito para você.</p>
+
+    <form class="form-busca" method="GET">
+            <input type="text" name="busca" placeholder="Buscar por modelo, marca...">
+            <button type="submit">Buscar</button>
+        
+        <div class="filtros">
+            <select name="marca">
+                <option value="">Todas as marcas</option>
+            </select>
+
+            <select name="modelo">
+                <option value="">Todos os modelos</option>
+            </select>
+
+            <select name="localizacao">
+                <option value="">Todas as localizações</option>
+            </select>
+        </div>
+    </form>
+        <div class="catalogo-layout">
+            <div class="catalogo-sidebar">
+                <div class="filtro-grupo">
+                    <h3>Marca</h3>
+                    <button type="button">Ver mais</button>
+                </div>
+
+                <div class="filtro-grupo">
+                    <h3>Modelo</h3>
+                    <button type="button">Ver mais</button>
+                </div>
+
+                <div class="filtro-grupo">
+                    <h3>Ano</h3>
+
+                    <div class="filtro-ano">
+                        <input type="range" name="ano_minimo" max="2026" min="2000">
+                        <input type="range" name="ano_maximo" min="2000" max="2026">
+                    </div>
+                </div>
+            </div>
+          <div class="catalogo-conteudo">
+                <!-- Controles de visualização -->
+                <div class="catalogo-visualizacao">
+
+                    <button type="button"
+                            class="visualizacao-grade"
+                            title="Visualizar em grade">
+                        <i class="fas fa-th"></i>
+                    </button>
+
+                    <button type="button"
+                            class="visualizacao-lista"
+                            title="Visualizar em lista">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+                <!-- Lista de veículos -->
+                <div class="catalogo-veiculos">
+                    {% if veiculos %}
+                        {% for veiculo in veiculos %}
+                            <!-- Cartão de cada veículo -->
+                            <div class="veiculo-card">
+                                <div class="veiculo-imagem">
+                                    <img src="{{ url_for('static', filename='images:/' + veiculo.imagem)}}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
+
+                                    <button type="button" class="favorito">
+                                        ♡
+                                    </button>
+                                </div>
+                                <div class="veiculo-info">
+                                    <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
+                                    <p>{{ veiculo.ano }} • {{ veiculo.combustivel }} • {{ veiculo.transmissao }}</p>
+                                    <p class="veiculo-preco">R$ {{ veiculo.preco }}</p>
+
+                                    <a href="#">Ver detalhes</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Nenhum veículo disponível no momento.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
