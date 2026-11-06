@@ -14,10 +14,19 @@
     <!-- Ícones -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
     <!-- CSS -->
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+    <!-- CSS -->
+    {% if request.endpoint == 'cadastrar_veiculo' %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/cadastro.css') }}"
+    >
+    {% endif %}
+
 </head>
 
 <body>
@@ -49,16 +58,19 @@
             <!-- Navegação -->
             <nav class="navbar" aria-label="Menu principal">
 
-                <a href="/" class="nav-link active">
+                <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">
                     <i class="fa-solid fa-house"></i>
                     Início
                 </a>
 
-                <a href="/catalogo" class="nav-link">
+                <a href="/catalogo" class="nav-link {% if request.path == '/catalogo' %}active{% endif %}">
+                    <i class="fa-solid fa-car-side"></i>
                     Catálogo
                 </a>
 
-                <a href="/cadastrar-veiculo" class="nav-link">
+                <a href="{{ url_for('cadastrar_veiculo') }}"
+                class="nav-link {% if request.endpoint == 'cadastrar_veiculo' %}active{% endif %}">
+                    <i class="fa-solid fa-circle-plus"></i>
                     Cadastrar Veículo
                 </a>
 

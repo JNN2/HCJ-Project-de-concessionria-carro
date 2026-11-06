@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %}
-HCJ Motors | Início
+BMW M3 Competition | HCJ Motors
 {% endblock %}
 
 {% block content %}
 
 <section class="detalhes">
     <div class="imagens">
-        <img src="../static/images/m3_competition.webp"
-            alt="foto do carro bmw m3 competition, possível de ver a frente e lateral do carro">
+        <img
+            src="{{ url_for('static', filename='images/m3_competition.webp') }}"
+            alt="BMW M3 Competition 2022, vista frontal e lateral"
+        >
     </div>
     <div class="detalhes_veiculo">
         <div class="detalhes_veiculo_top">
