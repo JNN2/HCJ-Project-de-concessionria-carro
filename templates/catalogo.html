@@ -71,8 +71,7 @@ HCJ Motors | Catálogo de Veículos
                             <!-- Cartão de cada veículo -->
                             <div class="veiculo-card">
                                 <div class="veiculo-imagem">
-                                    <img src="{{ url_for('static', filename='images:/' + veiculo.imagem)}}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
-
+                                    <img src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}" >
                                     <button type="button" class="favorito">
                                         ♡
                                     </button>
@@ -81,8 +80,9 @@ HCJ Motors | Catálogo de Veículos
                                     <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
                                     <p>{{ veiculo.ano }} • {{ veiculo.combustivel }} • {{ veiculo.transmissao }}</p>
                                     <p class="veiculo-preco">R$ {{ veiculo.preco }}</p>
-
-                                    <a href="#">Ver detalhes</a>
+                                    <a href="{{ url_for('detalhes_veiculo', id=veiculo.id) }}">
+                                        Ver detalhes
+                                    </a>
                                 </div>
                             </div>
                         {% endfor %}
