@@ -1,69 +1,48 @@
 {% extends "base.html" %}
 
-{% block title %}
-BMW M3 Competition | HCJ Motors
-{% endblock %}
+{% block title %}{{ veiculo.marca }} {{ veiculo.modelo }} | HCJ Motors{% endblock %}
 
 {% block content %}
-
 <section class="detalhes">
     <div class="imagens">
         <img
-            src="{{ url_for('static', filename='images/m3_competition.webp') }}"
-            alt="BMW M3 Competition 2022, vista frontal e lateral"
+            src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}"
+            alt="{{ veiculo.marca }} {{ veiculo.modelo }}, ano {{ veiculo.ano }}"
         >
     </div>
+
     <div class="detalhes_veiculo">
         <div class="detalhes_veiculo_top">
-            <h1>BMW <strong id="m3">M3</strong></h1>
-            <h2>3.0 I6 TWINTURBO GASOLINA COMPETITION M STEPTRONIC</h2>
+            <h1>{{ veiculo.marca }} <strong class="modelo">{{ veiculo.modelo }}</strong></h1>
+            <p class="preco">R$ {{ veiculo.preco }}</p>
         </div>
-        <div class="detalhes_veiculo_mid">
-            <ul class="detalhes_veiculo_lista">
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>Ano</h3>
-                    <strong>2022</strong>
-                </li>
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>KM</h3>
-                    <strong>25.500</strong>
-                </li>
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>Câmbio</h3>
-                    <strong>Automático</strong>
-                </li>
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>Carroceria</h3>
-                    <strong>Sedã</strong>
-                </li>
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>Combustível</h3>
-                    <strong>Gasolina</strong>
-                </li>
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>Final de placa</h3>
-                    <strong>4</strong>
-                </li>
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>Cor</h3>
-                    <strong>Cinza</strong>
-                </li>
-                <li class="detalhes_veiculo_item_lista">
-                    <h3>Todas as revisões feitas</h3>
-                    <strong>Sim</strong>
-                </li>
 
-
-            </ul>
-            <div class="sobre_veiculo">
-                <h2>Sobre este carro</h2>
-                <p>-Cor individual VERDANT GREEN PEARl -interno - Merino Laranja Kyalami/ Preto -Kit ATM - 700 WHP
-                    multimapas -Espaçador -Rodas prata acetinado Wheelfix -grade frontal Cs em carbono -entrada de ar
-                    frontal carbono -fornt lip black piano -PPF full -ClearPlex pára-brisa -última revisão css 14/09/26
-                    Sem retoque Somente venda !!!sem consignação !!!</p>
-            </div>
-        </div>
+        <ul class="detalhes_veiculo_lista">
+            <li class="detalhes_veiculo_item_lista">
+                <h2>Ano</h2>
+                <strong>{{ veiculo.ano }}</strong>
+            </li>
+            <li class="detalhes_veiculo_item_lista">
+                <h2>KM</h2>
+                <strong>{{ veiculo.quilometragem }}</strong>
+            </li>
+            <li class="detalhes_veiculo_item_lista">
+                <h2>Câmbio</h2>
+                <strong>{{ veiculo.transmissao }}</strong>
+            </li>
+            <li class="detalhes_veiculo_item_lista">
+                <h2>Carroceria</h2>
+                <strong>{{ veiculo.carroceria }}</strong>
+            </li>
+            <li class="detalhes_veiculo_item_lista">
+                <h2>Combustível</h2>
+                <strong>{{ veiculo.combustivel }}</strong>
+            </li>
+            <li class="detalhes_veiculo_item_lista">
+                <h2>Cor</h2>
+                <strong>{{ veiculo.cor }}</strong>
+            </li>
+        </ul>
     </div>
-
 </section>
-{% endblock%}
+{% endblock %}
