@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/catalogo.css') }}">
+{% endblock %}
 {% block title %}
 HCJ Motors | Catálogo de Veículos
 {% endblock %}
 {% block content %}
+
 <section class="catalogo">
     <div class="container">
 
@@ -14,14 +18,6 @@ HCJ Motors | Catálogo de Veículos
             <button type="submit">Buscar</button>
         
         <div class="filtros">
-            <select name="marca">
-                <option value="">Todas as marcas</option>
-            </select>
-
-            <select name="modelo">
-                <option value="">Todos os modelos</option>
-            </select>
-
             <select name="localizacao">
                 <option value="">Todas as localizações</option>
             </select>
@@ -43,8 +39,8 @@ HCJ Motors | Catálogo de Veículos
                     <h3>Ano</h3>
 
                     <div class="filtro-ano">
-                        <input type="range" name="ano_minimo" max="2026" min="2000">
-                        <input type="range" name="ano_maximo" min="2000" max="2026">
+                        <input type="range" name="ano_minimo" max="2026" min="2000" value="2000">
+                        <input type="range" name="ano_maximo" min="2000" max="2026" value="2026">
                     </div>
                 </div>
             </div>

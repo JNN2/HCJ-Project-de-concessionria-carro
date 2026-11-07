@@ -14,12 +14,13 @@
     <!-- Ícones -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- CSS -->
+       <!-- CSS principal -->
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/style.css') }}"
     >
-    <!-- CSS Cadastro veiculos -->
+
+    <!-- CSS Cadastro de Veículos -->
     {% if request.endpoint == 'cadastrar_veiculo' %}
     <link
         rel="stylesheet"
@@ -27,6 +28,8 @@
     >
     {% endif %}
 
+    <!-- CSS específico de cada página -->
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>

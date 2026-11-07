@@ -1,0 +1,514 @@
+
+/* ==========================================
+   CATÁLOGO DE VEÍCULOS
+========================================== */
+
+.catalogo {
+    padding: 30px 0 50px;
+    color: var(--text);
+}
+
+.catalogo h1 {
+    font-family: var(--font-title);
+    font-size: 32px;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.catalogo h1 span {
+    color: var(--primary);
+}
+
+.catalogo .container > p {
+    color: var(--text-muted-current);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+/* ==========================================
+   PESQUISA SUPERIOR
+========================================== */
+
+.form-busca {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px 120px;
+    gap: 12px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.form-busca > input {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+    padding: 0 16px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+}
+
+.form-busca > input:focus {
+    border-color: var(--primary);
+}
+
+.form-busca > input::placeholder {
+    color: var(--text-muted-current);
+}
+
+.filtros {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+}
+
+.filtros select {
+    width: 100%;
+    height: 46px;
+    padding: 0 12px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.filtros select:hover {
+    border-color: var(--primary);
+}
+
+.form-busca > button {
+    grid-column: 3;
+    grid-row: 1;
+    height: 46px;
+    padding: 0 15px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.form-busca > button:hover {
+    background: var(--primary-hover);
+}
+
+/* ==========================================
+   LAYOUT PRINCIPAL
+========================================== */
+
+.catalogo-layout {
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.catalogo-sidebar {
+    min-width: 0;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    height: fit-content;
+}
+
+.catalogo-conteudo {
+    min-width: 0;
+    width: 100%;
+}
+
+/* ==========================================
+   FILTROS DA SIDEBAR
+========================================== */
+
+.filtro-grupo {
+    margin-bottom: 22px;
+}
+
+.filtro-grupo:last-child {
+    margin-bottom: 0;
+}
+
+.filtro-grupo + .filtro-grupo {
+    padding-top: 17px;
+    border-top: 1px solid var(--border);
+}
+
+.filtro-grupo h3 {
+    font-family: var(--font-title);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 13px;
+}
+
+/* Opções que vierem a ser exibidas */
+.filtro-grupo label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-muted-current);
+    font-size: 13px;
+    margin-bottom: 9px;
+    cursor: pointer;
+}
+
+.filtro-grupo label input {
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.filtro-grupo button {
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filtro-grupo button:hover {
+    color: var(--primary-hover);
+}
+
+/* ==========================================
+   FILTRO DE ANO
+   UMA TRILHA E DUAS BOLINHAS
+========================================== */
+
+.filtro-ano {
+    position: relative;
+    height: 42px;
+}
+
+/* Linha única */
+.filtro-ano::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 17px;
+    height: 5px;
+    background: var(--border);
+    border-radius: 10px;
+}
+
+/* Sobrepõe os dois controles */
+.filtro-ano input[type="range"] {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    margin: 0;
+    background: transparent;
+    pointer-events: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+/* Trilha transparente: a linha será desenhada uma só vez */
+.filtro-ano input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    background: transparent;
+}
+
+.filtro-ano input[type="range"]::-moz-range-track {
+    height: 5px;
+    background: transparent;
+}
+
+/* Bolinha no Chrome e Edge */
+.filtro-ano input[type="range"]::-webkit-slider-thumb {
+    width: 17px;
+    height: 17px;
+    margin-top: -6px;
+    background: var(--primary);
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+/* Bolinha no Firefox */
+.filtro-ano input[type="range"]::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    background: var(--primary);
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* ==========================================
+   VISUALIZAÇÃO GRADE / LISTA
+========================================== */
+
+.catalogo-visualizacao {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.catalogo-visualizacao button {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted-current);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.catalogo-visualizacao button:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* ==========================================
+   GRID DOS VEÍCULOS
+========================================== */
+
+.catalogo-veiculos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+    align-items: start;
+}
+
+/* ==========================================
+   CARDS DOS VEÍCULOS
+========================================== */
+
+.veiculo-card {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    transition: var(--transition);
+}
+
+.veiculo-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary);
+}
+
+/* ==========================================
+   IMAGEM DO VEÍCULO
+========================================== */
+
+.veiculo-imagem {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+    background: var(--surface);
+}
+
+.veiculo-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+}
+
+.veiculo-card:hover .veiculo-imagem img {
+    transform: scale(1.04);
+}
+
+/* ==========================================
+   FAVORITO
+========================================== */
+
+.favorito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    cursor: pointer;
+    font-size: 19px;
+    transition: var(--transition);
+}
+
+.favorito:hover {
+    color: var(--primary);
+}
+
+/* ==========================================
+   INFORMAÇÕES DO VEÍCULO
+========================================== */
+
+.veiculo-info {
+    padding: 15px;
+}
+
+.veiculo-info h3 {
+    font-family: var(--font-title);
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.veiculo-info p {
+    color: var(--text-muted-current);
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.veiculo-preco {
+    color: var(--primary) !important;
+    font-size: 19px !important;
+    font-weight: bold;
+    margin: 12px 0 !important;
+}
+
+/* Botão de detalhes */
+.veiculo-info a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.veiculo-info a:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* ==========================================
+   CATÁLOGO VAZIO
+========================================== */
+
+.catalogo-veiculos > p {
+    grid-column: 1 / -1;
+    padding: 35px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-muted-current);
+    text-align: center;
+}
+
+/* ==========================================
+   RESPONSIVIDADE - TABLET
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .catalogo-layout {
+        grid-template-columns: 210px minmax(0, 1fr);
+    }
+
+    .catalogo-veiculos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVIDADE - TELAS MENORES
+========================================== */
+
+@media (max-width: 750px) {
+
+    .catalogo-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .catalogo-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .filtro-grupo {
+        margin-bottom: 0;
+    }
+
+    .filtro-grupo:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .filtro-grupo + .filtro-grupo {
+        border-top: none;
+        padding-top: 0;
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVIDADE - CELULAR
+========================================== */
+
+@media (max-width: 550px) {
+
+    .catalogo {
+        padding: 20px 0 35px;
+    }
+
+    .catalogo h1 {
+        font-size: 24px;
+    }
+
+    .form-busca {
+        grid-template-columns: 1fr;
+    }
+
+    .form-busca > input,
+    .form-busca > button,
+    .filtros {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .form-busca > input,
+    .filtros select,
+    .form-busca > button {
+        width: 100%;
+    }
+
+    .catalogo-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .filtro-grupo:last-child {
+        grid-column: auto;
+    }
+
+    .catalogo-veiculos {
+        grid-template-columns: 1fr;
+    }
+}
