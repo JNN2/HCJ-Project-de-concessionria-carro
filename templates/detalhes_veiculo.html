@@ -5,10 +5,8 @@
 {% block content %}
 <section class="detalhes">
     <div class="imagens">
-        <img
-            src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}"
-            alt="{{ veiculo.marca }} {{ veiculo.modelo }}, ano {{ veiculo.ano }}"
-        >
+        <img src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}"
+            alt="{{ veiculo.marca }} {{ veiculo.modelo }}, ano {{ veiculo.ano }}">
     </div>
 
     <div class="detalhes_veiculo">
@@ -43,6 +41,12 @@
                 <strong>{{ veiculo.cor }}</strong>
             </li>
         </ul>
+        <div class="descricao"></div>
+        <h2>Sobre este carro</h2>
+        <p id="descricao">cor individual frozen full ppf Outros Opcionais: Comando de áudio no volante, Controle de
+            estabilidade,
+            Direção Elétrica, Distribuição eletrônica de frenagem, Kit Multimídia, Pára-choques na cor do veículo.</p>
+    </div>
     </div>
 </section>
 {% endblock %}
