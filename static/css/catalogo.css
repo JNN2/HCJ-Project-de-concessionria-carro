@@ -1,17 +1,28 @@
-
-/* ==========================================
-   CATÁLOGO DE VEÍCULOS
-========================================== */
-
 .catalogo {
     padding: 30px 0 50px;
     color: var(--text);
+    background-color: var(--bg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
+/* Fundo dos temas */
+[data-theme="dark"] .catalogo {
+    background-image:
+        linear-gradient(rgba(11, 11, 13, 0.35), rgba(11, 11, 13, 0.75)),
+        url("../images/cadastro-dark.png");
+}
+[data-theme="light"] .catalogo {
+    background-image:
+        linear-gradient(rgba(250, 248, 252, 0.35), rgba(250, 248, 252, 0.75)),
+        url("../images/cadastro-light.png");
+}
+
+/* Título */
 .catalogo h1 {
     font-family: var(--font-title);
     font-size: 32px;
-    font-weight: bold;
     font-style: italic;
     margin-bottom: 8px;
 }
@@ -26,25 +37,18 @@
     margin-bottom: 22px;
 }
 
-/* ==========================================
-   PESQUISA SUPERIOR
-========================================== */
-
+/* Pesquisa superior */
 .form-busca {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 220px 120px;
+    grid-template-columns: minmax(0, 1fr) 300px 120px;
     gap: 12px;
     margin-bottom: 25px;
-    align-items: center;
 }
 
-.form-busca > input {
-    grid-column: 1;
-    grid-row: 1;
+.form-busca input {
     width: 100%;
-    min-width: 0;
     height: 46px;
-    padding: 0 16px;
+    padding: 0 15px;
     background: var(--surface);
     color: var(--text);
     border: 1px solid var(--border);
@@ -52,21 +56,15 @@
     outline: none;
 }
 
-.form-busca > input:focus {
+.form-busca input:focus {
     border-color: var(--primary);
 }
 
-.form-busca > input::placeholder {
-    color: var(--text-muted-current);
+.form-busca .filtros {
+    width: 100%;
 }
 
-.filtros {
-    grid-column: 2;
-    grid-row: 1;
-    min-width: 0;
-}
-
-.filtros select {
+.form-busca select {
     width: 100%;
     height: 46px;
     padding: 0 12px;
@@ -74,19 +72,14 @@
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: 12px;
-    outline: none;
-    transition: var(--transition);
 }
 
-.filtros select:hover {
-    border-color: var(--primary);
-}
-
-.form-busca > button {
-    grid-column: 3;
-    grid-row: 1;
+.form-busca button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     height: 46px;
-    padding: 0 15px;
     background: var(--primary);
     color: #fff;
     border: none;
@@ -96,80 +89,49 @@
     transition: var(--transition);
 }
 
-.form-busca > button:hover {
+.form-busca button:hover {
     background: var(--primary-hover);
 }
 
-/* ==========================================
-   LAYOUT PRINCIPAL
-========================================== */
-
+/* Organização principal do catálogo */
 .catalogo-layout {
     display: grid;
-    grid-template-columns: 230px minmax(0, 1fr);
+    grid-template-columns: 230px 1fr;
+    align-items: stretch;
     gap: 22px;
-    align-items: start;
 }
 
 .catalogo-sidebar {
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 430px;
     padding: 20px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
-    height: fit-content;
 }
 
 .catalogo-conteudo {
     min-width: 0;
-    width: 100%;
 }
 
-/* ==========================================
-   FILTROS DA SIDEBAR
-========================================== */
-
+/* Sidebar do catálogo */
 .filtro-grupo {
     margin-bottom: 22px;
-}
-
-.filtro-grupo:last-child {
-    margin-bottom: 0;
-}
-
-.filtro-grupo + .filtro-grupo {
-    padding-top: 17px;
-    border-top: 1px solid var(--border);
 }
 
 .filtro-grupo h3 {
     font-family: var(--font-title);
     font-size: 16px;
-    font-weight: bold;
     margin-bottom: 13px;
-}
-
-/* Opções que vierem a ser exibidas */
-.filtro-grupo label {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: var(--text-muted-current);
-    font-size: 13px;
-    margin-bottom: 9px;
-    cursor: pointer;
-}
-
-.filtro-grupo label input {
-    accent-color: var(--primary);
-    cursor: pointer;
 }
 
 .filtro-grupo button {
     padding: 0;
     background: transparent;
-    border: none;
     color: var(--primary);
+    border: none;
     font-size: 12px;
     cursor: pointer;
     transition: var(--transition);
@@ -179,32 +141,39 @@
     color: var(--primary-hover);
 }
 
-/* ==========================================
-   FILTRO DE ANO
-   UMA TRILHA E DUAS BOLINHAS
-========================================== */
-
+/* Barra visual de ano */
 .filtro-ano {
-    position: relative;
-    height: 42px;
+    margin-top: 10px;
 }
 
-/* Linha única */
-.filtro-ano::before {
+.ano-valores {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-muted-current);
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.ano-controles {
+    position: relative;
+    height: 25px;
+}
+
+/* Linhas da barra (sendo única) */
+.ano-controles::before {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 17px;
+    top: 10px;
+    width: 100%;
     height: 5px;
     background: var(--border);
     border-radius: 10px;
 }
 
-/* Sobrepõe os dois controles */
-.filtro-ano input[type="range"] {
+/* Posicionamento dos dois controles (dois circulos) */
+.ano-controles input {
     position: absolute;
-    top: 7px;
+    top: 0;
     left: 0;
     width: 100%;
     height: 25px;
@@ -215,19 +184,20 @@
     -webkit-appearance: none;
 }
 
-/* Trilha transparente: a linha será desenhada uma só vez */
-.filtro-ano input[type="range"]::-webkit-slider-runnable-track {
+/* Linha transparente no Chrome e Edge */
+.ano-controles input::-webkit-slider-runnable-track {
     height: 5px;
     background: transparent;
 }
 
-.filtro-ano input[type="range"]::-moz-range-track {
+/* Linha transparente no Firefox */
+.ano-controles input::-moz-range-track {
     height: 5px;
     background: transparent;
 }
 
-/* Bolinha no Chrome e Edge */
-.filtro-ano input[type="range"]::-webkit-slider-thumb {
+/* Bolinhas no Chrome e Edge */
+.ano-controles input::-webkit-slider-thumb {
     width: 17px;
     height: 17px;
     margin-top: -6px;
@@ -236,12 +206,11 @@
     border-radius: 50%;
     cursor: pointer;
     pointer-events: auto;
-    appearance: none;
     -webkit-appearance: none;
 }
 
-/* Bolinha no Firefox */
-.filtro-ano input[type="range"]::-moz-range-thumb {
+/* Bolinhas no Firefox */
+.ano-controles input::-moz-range-thumb {
     width: 13px;
     height: 13px;
     background: var(--primary);
@@ -251,10 +220,7 @@
     pointer-events: auto;
 }
 
-/* ==========================================
-   VISUALIZAÇÃO GRADE / LISTA
-========================================== */
-
+/* Botões de visualização */
 .catalogo-visualizacao {
     display: flex;
     justify-content: flex-end;
@@ -265,9 +231,6 @@
 .catalogo-visualizacao button {
     width: 38px;
     height: 38px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -281,21 +244,14 @@
     border-color: var(--primary);
 }
 
-/* ==========================================
-   GRID DOS VEÍCULOS
-========================================== */
-
+/* Grade de veículos */
 .catalogo-veiculos {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 17px;
-    align-items: start;
 }
 
-/* ==========================================
-   CARDS DOS VEÍCULOS
-========================================== */
-
+/* Cards */
 .veiculo-card {
     min-width: 0;
     overflow: hidden;
@@ -310,15 +266,12 @@
     border-color: var(--primary);
 }
 
-/* ==========================================
-   IMAGEM DO VEÍCULO
-========================================== */
-
+/* Imagem veículo */
 .veiculo-imagem {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
     position: relative;
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
     background: var(--surface);
 }
 
@@ -327,50 +280,35 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: var(--transition);
 }
 
-.veiculo-card:hover .veiculo-imagem img {
-    transform: scale(1.04);
-}
-
-/* ==========================================
-   FAVORITO
-========================================== */
-
+/* Favorito */
 .favorito {
     position: absolute;
     top: 10px;
     right: 10px;
     width: 36px;
     height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 50%;
     background: rgba(0, 0, 0, 0.55);
     color: #fff;
-    cursor: pointer;
+    border: none;
+    border-radius: 50%;
     font-size: 19px;
-    transition: var(--transition);
+    cursor: pointer;
 }
 
 .favorito:hover {
     color: var(--primary);
 }
 
-/* ==========================================
-   INFORMAÇÕES DO VEÍCULO
-========================================== */
-
+/* Informações dos veículos */
 .veiculo-info {
     padding: 15px;
 }
 
 .veiculo-info h3 {
     font-family: var(--font-title);
-    font-size: 17px;
+    font-size: 16px;
     margin-bottom: 10px;
 }
 
@@ -380,22 +318,21 @@
     margin-bottom: 12px;
 }
 
-.veiculo-preco {
-    color: var(--primary) !important;
-    font-size: 19px !important;
+.veiculo-info .veiculo-preco {
+    color: var(--primary);
+    font-size: 19px;
     font-weight: bold;
-    margin: 12px 0 !important;
+    margin: 12px 0;
 }
 
-/* Botão de detalhes */
 .veiculo-info a {
     display: block;
-    text-align: center;
     padding: 10px;
     background: var(--surface);
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: 20px;
+    text-align: center;
     text-decoration: none;
     font-size: 12px;
     font-weight: bold;
@@ -404,77 +341,68 @@
 
 .veiculo-info a:hover {
     background: var(--primary);
-    border-color: var(--primary);
     color: #fff;
+    border-color: var(--primary);
 }
 
-/* ==========================================
-   CATÁLOGO VAZIO
-========================================== */
-
+/* Catálogo vazio */
 .catalogo-veiculos > p {
     grid-column: 1 / -1;
     padding: 35px 20px;
     background: var(--card);
+    color: var(--text-muted-current);
     border: 1px solid var(--border);
     border-radius: 12px;
-    color: var(--text-muted-current);
     text-align: center;
 }
 
-/* ==========================================
-   RESPONSIVIDADE - TABLET
-========================================== */
+/* Para que o css identifique a ordem das opções da parte de cima */
+.form-busca > input {
+    grid-column: 1;
+    grid-row: 1;
+}
 
+.form-busca .filtros {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.form-busca button {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+/* Tablet */
 @media (max-width: 1000px) {
-
     .catalogo-layout {
-        grid-template-columns: 210px minmax(0, 1fr);
+        grid-template-columns: 210px 1fr;
     }
 
     .catalogo-veiculos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-/* ==========================================
-   RESPONSIVIDADE - TELAS MENORES
-========================================== */
-
+/* Telas menores */
 @media (max-width: 750px) {
-
     .catalogo-layout {
         grid-template-columns: 1fr;
     }
 
     .catalogo-sidebar {
+        min-height: 0;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
     }
 
     .filtro-grupo {
         margin-bottom: 0;
     }
-
-    .filtro-grupo:last-child {
-        grid-column: 1 / -1;
-    }
-
-    .filtro-grupo + .filtro-grupo {
-        border-top: none;
-        padding-top: 0;
-    }
-
 }
 
-/* ==========================================
-   RESPONSIVIDADE - CELULAR
-========================================== */
-
+/* Celular */
 @media (max-width: 550px) {
-
     .catalogo {
         padding: 20px 0 35px;
     }
@@ -487,28 +415,30 @@
         grid-template-columns: 1fr;
     }
 
-    .form-busca > input,
-    .form-busca > button,
-    .filtros {
+    .form-busca input {
         grid-column: 1;
-        grid-row: auto;
+        grid-row: 1;
     }
 
-    .form-busca > input,
-    .filtros select,
-    .form-busca > button {
-        width: 100%;
+    .form-busca .filtros {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .form-busca button {
+        grid-column: 1;
+        grid-row: 3;
     }
 
     .catalogo-sidebar {
         grid-template-columns: 1fr;
     }
 
-    .filtro-grupo:last-child {
-        grid-column: auto;
-    }
-
     .catalogo-veiculos {
         grid-template-columns: 1fr;
+    }
+
+    .veiculo-imagem {
+        height: 200px;
     }
 }
