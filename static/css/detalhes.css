@@ -1,0 +1,54 @@
+.detalhes {
+    max-width: var(--container-width);
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+.imagens {
+    display: flex;
+    justify-content: center;
+}
+
+.imagens img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.detalhes_veiculo_top {
+    margin-top: 40px;
+}
+
+.detalhes_veiculo_top h1 {
+    margin: 0;
+}
+
+.modelo {
+    color: var(--primary);
+}
+
+.preco {
+    margin: 8px 0 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.detalhes_veiculo_lista {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.detalhes_veiculo_item_lista h2 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+}
+
+@media (max-width: 700px) {
+    .detalhes_veiculo_lista {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
