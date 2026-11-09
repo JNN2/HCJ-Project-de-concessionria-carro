@@ -41,12 +41,40 @@
                 <strong>{{ veiculo.cor }}</strong>
             </li>
         </ul>
-        <div class="descricao"></div>
-        <h2>Sobre este carro</h2>
-        <p id="descricao">cor individual frozen full ppf Outros Opcionais: Comando de áudio no volante, Controle de
-            estabilidade,
-            Direção Elétrica, Distribuição eletrônica de frenagem, Kit Multimídia, Pára-choques na cor do veículo.</p>
-    </div>
+        <section class="descricao" aria-labelledby="descricao-titulo">
+            <h2 id="descricao-titulo">Sobre este carro</h2>
+            <p id="descricao">{{ veiculo.descricao }}</p>
+        </section>
+
+        <section class="interesse" aria-labelledby="interesse-titulo">
+            <h2 id="interesse-titulo">Tenho interesse</h2>
+            <p>Preencha seus dados para entrar em contato sobre este veículo.</p>
+
+            <form class="interesse-form">
+                <div class="interesse-campo">
+                    <label for="interesse-nome">Nome completo</label>
+                    <input id="interesse-nome" name="nome" type="text" autocomplete="name" required>
+                </div>
+
+                <div class="interesse-campo">
+                    <label for="interesse-email">E-mail</label>
+                    <input id="interesse-email" name="email" type="email" autocomplete="email" required>
+                </div>
+
+                <div class="interesse-campo">
+                    <label for="interesse-telefone">Telefone</label>
+                    <input id="interesse-telefone" name="telefone" type="tel" autocomplete="tel" required>
+                </div>
+
+                <div class="interesse-campo interesse-campo-mensagem">
+                    <label for="interesse-mensagem">Mensagem</label>
+                    <textarea id="interesse-mensagem" name="mensagem" rows="5"
+                        placeholder="Tenho interesse neste veículo..." required></textarea>
+                </div>
+
+                <button class="interesse-enviar" type="button">Enviar</button>
+            </form>
+        </section>
     </div>
 </section>
 {% endblock %}
