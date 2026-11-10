@@ -15,16 +15,19 @@
     {% if request.endpoint == 'cadastrar_veiculo' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
     {% endif %}
-
     <!-- CSS detalhes-veiculo -->
     {% if request.endpoint == 'detalhes_veiculo' %}
     <link rel="stylesheet" href="{{url_for('static', filename='css/detalhes.css') }}">
     {% endif %}
-
     <!-- CSS específico do catálogo -->
     {% if request.endpoint == 'catalogo' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/catalogo.css') }}">
     {% endif %}
+    <!-- CSS específico do anuncios do vendedor -->
+    {% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meus_anuncios.css') }}">
+    {% endblock %}
+
 </head>
 
 <body>
@@ -40,22 +43,41 @@
                     <small>2026</small>
                 </div>
             </a>
-            <!-- Navegação -->
+            <!-- Navegação principal -->
             <nav class="navbar" aria-label="Menu principal">
-                <a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"{% if request.endpoint == 'home' %}aria-current="page"{% endif %}>
+
+                <!-- Início -->
+                <a href="{{ url_for('home') }}"
+                class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
+                {% if request.endpoint == 'home' %}aria-current="page"{% endif %}>
                     <i class="fa-solid fa-house" aria-hidden="true"></i>
                     Início
                 </a>
 
-                <a href="{{ url_for('catalogo') }}" class="nav-link {% if request.endpoint == 'catalogo' %}active{% endif %}" {% if request.endpoint == 'catalogo' %} aria-current="page"{% endif%}>
+                <!-- Catálogo -->
+                <a href="{{ url_for('catalogo') }}"
+                class="nav-link {% if request.endpoint == 'catalogo' %}active{% endif %}"
+                {% if request.endpoint == 'catalogo' %}aria-current="page"{% endif %}>
                     <i class="fa-solid fa-car-side" aria-hidden="true"></i>
                     Catálogo
                 </a>
 
-                <a href="{{ url_for('cadastrar_veiculo') }}" class="nav-link {% if request.endpoint == 'cadastrar_veiculo' %}active{% endif %}" {% if request.endpoint == 'cadastrar_veiculo' %}aria-current="page"{% endif %}>
+                <!-- Cadastrar veículo -->
+                <a href="{{ url_for('cadastrar_veiculo') }}"
+                class="nav-link {% if request.endpoint == 'cadastrar_veiculo' %}active{% endif %}"
+                {% if request.endpoint == 'cadastrar_veiculo' %}aria-current="page"{% endif %}>
                     <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
                     Cadastrar Veículo
                 </a>
+
+                <!-- Meus Anúncios -->
+                <a href="{{ url_for('meus_anuncios') }}"
+                class="nav-link {% if request.endpoint == 'meus_anuncios' %}active{% endif %}"
+                {% if request.endpoint == 'meus_anuncios' %}aria-current="page"{% endif %}>
+                    <i class="fa-solid fa-rectangle-list" aria-hidden="true"></i>
+                    Meus Anúncios
+                </a>
+
             </nav>
 
             <!-- Ações -->
@@ -93,9 +115,14 @@
     {% if request.endpoint == 'cadastrar_veiculo' %}
     <script src="{{ url_for('static', filename='js/cadastro.js') }}" defer></script>
     {% endif %}
+    <!-- JavaScript dos filtros e barra em list ou card -->
     {% if request.endpoint == 'catalogo' %}
     <script src="{{ url_for('static', filename='js/catalogo.js') }}" defer></script>
     {% endif %}
+    <!-- JavaScript Anuncio dos vendedores -->
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/meus_anuncios.js') }}" defer> </script>
+    {% endblock %}
 
 </body>
 
