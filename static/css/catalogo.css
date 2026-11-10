@@ -1,80 +1,57 @@
 .catalogo {
     padding: 30px 0 50px;
     color: var(--text);
-    background-color: var(--bg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: var(--bg) center / cover no-repeat;
 }
-
-/* Fundo dos temas */
 [data-theme="dark"] .catalogo {
-    background-image:
-        linear-gradient(rgba(11, 11, 13, 0.35), rgba(11, 11, 13, 0.75)),
-        url("../images/cadastro-dark.png");
+    background-image: linear-gradient(rgba(11,11,13,.35), rgba(11,11,13,.75)), url("../images/cadastro-dark.png");
 }
 [data-theme="light"] .catalogo {
-    background-image:
-        linear-gradient(rgba(250, 248, 252, 0.35), rgba(250, 248, 252, 0.75)),
-        url("../images/cadastro-light.png");
+    background-image: linear-gradient(rgba(250,248,252,.35), rgba(250,248,252,.75)), url("../images/cadastro-light.png");
 }
-
-/* Título */
 .catalogo h1 {
     font-family: var(--font-title);
     font-size: 32px;
     font-style: italic;
     margin-bottom: 8px;
 }
-
-.catalogo h1 span {
-    color: var(--primary);
-}
-
+.catalogo h1 span { color: var(--primary); }
 .catalogo .container > p {
     color: var(--text-muted-current);
     font-size: 14px;
     margin-bottom: 22px;
 }
-
-/* Pesquisa superior */
+/* Pesquisa */
 .form-busca {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px 120px;
+    grid-template-columns: minmax(0,1fr) 300px 120px;
     gap: 12px;
     margin-bottom: 25px;
 }
-
-.form-busca input {
+.form-busca input, .form-busca select {
     width: 100%;
     height: 46px;
-    padding: 0 15px;
     background: var(--surface);
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: 12px;
+}
+.form-busca input {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0 15px;
     outline: none;
 }
-
-.form-busca input:focus {
-    border-color: var(--primary);
-}
-
+.form-busca input:focus { border-color: var(--primary); }
+.form-busca select { padding: 0 12px; }
 .form-busca .filtros {
+    grid-column: 2;
+    grid-row: 1;
     width: 100%;
 }
-
-.form-busca select {
-    width: 100%;
-    height: 46px;
-    padding: 0 12px;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
 .form-busca button {
+    grid-column: 3;
+    grid-row: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,19 +65,14 @@
     cursor: pointer;
     transition: var(--transition);
 }
+.form-busca button:hover { background: var(--primary-hover); }
 
-.form-busca button:hover {
-    background: var(--primary-hover);
-}
-
-/* Organização principal do catálogo */
+/* Estrutura e filtos */
 .catalogo-layout {
     display: grid;
     grid-template-columns: 230px 1fr;
-    align-items: stretch;
     gap: 22px;
 }
-
 .catalogo-sidebar {
     display: flex;
     flex-direction: column;
@@ -111,22 +83,13 @@
     border: 1px solid var(--border);
     border-radius: 14px;
 }
-
-.catalogo-conteudo {
-    min-width: 0;
-}
-
-/* Sidebar do catálogo */
-.filtro-grupo {
-    margin-bottom: 22px;
-}
-
+.catalogo-conteudo { min-width: 0; }
+.filtro-grupo { margin-bottom: 22px; }
 .filtro-grupo h3 {
     font-family: var(--font-title);
     font-size: 16px;
     margin-bottom: 13px;
 }
-
 .filtro-grupo button {
     padding: 0;
     background: transparent;
@@ -136,16 +99,9 @@
     cursor: pointer;
     transition: var(--transition);
 }
-
-.filtro-grupo button:hover {
-    color: var(--primary-hover);
-}
-
-/* Barra visual de ano */
-.filtro-ano {
-    margin-top: 10px;
-}
-
+.filtro-grupo button:hover { color: var(--primary-hover); }
+/* Filtro de ano */
+.filtro-ano { margin-top: 10px; }
 .ano-valores {
     display: flex;
     justify-content: space-between;
@@ -153,13 +109,10 @@
     font-size: 12px;
     margin-bottom: 12px;
 }
-
 .ano-controles {
     position: relative;
     height: 25px;
 }
-
-/* Linhas da barra (sendo única) */
 .ano-controles::before {
     content: "";
     position: absolute;
@@ -169,8 +122,6 @@
     background: var(--border);
     border-radius: 10px;
 }
-
-/* Posicionamento dos dois controles (dois circulos) */
 .ano-controles input {
     position: absolute;
     top: 0;
@@ -183,20 +134,14 @@
     appearance: none;
     -webkit-appearance: none;
 }
-
-/* Linha transparente no Chrome e Edge */
 .ano-controles input::-webkit-slider-runnable-track {
     height: 5px;
     background: transparent;
 }
-
-/* Linha transparente no Firefox */
 .ano-controles input::-moz-range-track {
     height: 5px;
     background: transparent;
 }
-
-/* Bolinhas no Chrome e Edge */
 .ano-controles input::-webkit-slider-thumb {
     width: 17px;
     height: 17px;
@@ -209,7 +154,6 @@
     -webkit-appearance: none;
 }
 
-/* Bolinhas no Firefox */
 .ano-controles input::-moz-range-thumb {
     width: 13px;
     height: 13px;
@@ -220,7 +164,7 @@
     pointer-events: auto;
 }
 
-/* Botões de visualização */
+/* VISUALIZAÇÃO */
 .catalogo-visualizacao {
     display: flex;
     justify-content: flex-end;
@@ -244,14 +188,13 @@
     border-color: var(--primary);
 }
 
-/* Grade de veículos */
+/* VEÍCULOS E CARDS */
 .catalogo-veiculos {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 17px;
 }
 
-/* Cards */
 .veiculo-card {
     min-width: 0;
     overflow: hidden;
@@ -266,7 +209,6 @@
     border-color: var(--primary);
 }
 
-/* Imagem veículo */
 .veiculo-imagem {
     position: relative;
     width: 100%;
@@ -276,20 +218,19 @@
 }
 
 .veiculo-imagem img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
 
-/* Favorito */
 .favorito {
     position: absolute;
     top: 10px;
     right: 10px;
     width: 36px;
     height: 36px;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0,0,0,.55);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -297,14 +238,9 @@
     cursor: pointer;
 }
 
-.favorito:hover {
-    color: var(--primary);
-}
+.favorito:hover { color: var(--primary); }
 
-/* Informações dos veículos */
-.veiculo-info {
-    padding: 15px;
-}
+.veiculo-info { padding: 15px; }
 
 .veiculo-info h3 {
     font-family: var(--font-title);
@@ -345,7 +281,6 @@
     border-color: var(--primary);
 }
 
-/* Catálogo vazio */
 .catalogo-veiculos > p {
     grid-column: 1 / -1;
     padding: 35px 20px;
@@ -356,89 +291,36 @@
     text-align: center;
 }
 
-/* Para que o css identifique a ordem das opções da parte de cima */
-.form-busca > input {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.form-busca .filtros {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.form-busca button {
-    grid-column: 3;
-    grid-row: 1;
-}
-
-/* Tablet */
+/* RESPONSIVIDADE */
 @media (max-width: 1000px) {
-    .catalogo-layout {
-        grid-template-columns: 210px 1fr;
-    }
-
-    .catalogo-veiculos {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .catalogo-layout { grid-template-columns: 210px 1fr; }
+    .catalogo-veiculos { grid-template-columns: repeat(2,1fr); }
 }
 
-/* Telas menores */
 @media (max-width: 750px) {
-    .catalogo-layout {
-        grid-template-columns: 1fr;
-    }
+    .catalogo-layout { grid-template-columns: 1fr; }
 
     .catalogo-sidebar {
         min-height: 0;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3,1fr);
         gap: 15px;
     }
 
-    .filtro-grupo {
-        margin-bottom: 0;
-    }
+    .filtro-grupo { margin-bottom: 0; }
 }
 
-/* Celular */
 @media (max-width: 550px) {
-    .catalogo {
-        padding: 20px 0 35px;
-    }
+    .catalogo { padding: 20px 0 35px; }
+    .catalogo h1 { font-size: 24px; }
+    .form-busca { grid-template-columns: 1fr; }
 
-    .catalogo h1 {
-        font-size: 24px;
-    }
+    .form-busca input { grid-column: 1; grid-row: 1; }
+    .form-busca .filtros { grid-column: 1; grid-row: 2; }
+    .form-busca button { grid-column: 1; grid-row: 3; }
 
-    .form-busca {
-        grid-template-columns: 1fr;
-    }
+    .catalogo-sidebar,
+    .catalogo-veiculos { grid-template-columns: 1fr; }
 
-    .form-busca input {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .form-busca .filtros {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .form-busca button {
-        grid-column: 1;
-        grid-row: 3;
-    }
-
-    .catalogo-sidebar {
-        grid-template-columns: 1fr;
-    }
-
-    .catalogo-veiculos {
-        grid-template-columns: 1fr;
-    }
-
-    .veiculo-imagem {
-        height: 200px;
-    }
+    .veiculo-imagem { height: 200px; }
 }
