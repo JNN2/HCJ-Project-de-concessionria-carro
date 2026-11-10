@@ -1,0 +1,76 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+Meus Anúncios | HCJ Motors
+{% endblock %}
+
+{% block content %}
+<section class="meus-anuncios">
+    <div class="container">
+        <header class="anuncios-header">
+            <div>
+                <h1>Meus <span>Anúncios</span></h1>
+                <p>Consulte e gerencie seus veículos publicados.</p>
+            </div>
+
+            <a href="{{ url_for('cadastrar_veiculo') }}"
+               class="novo-anuncio">
+                Novo anúncio
+            </a>
+        </header>
+
+        <div class="anuncios-resumo">
+            <p>Total de anúncios: <strong>{{ anuncios|length }}</strong></p>
+        </div>
+
+        <div id="lista-anuncios" class="anuncios-grid">
+            {% for anuncio in anuncios %}
+            <article class="anuncio-card"
+                     data-id="{{ anuncio.id }}"
+                     data-status="{{ anuncio.status }}">
+
+                <img
+                    src="{{ url_for('static', filename='images/' ~ anuncio.imagem) }}"
+                    alt="{{ anuncio.marca }} {{ anuncio.modelo }}"
+                    loading="lazy"
+                >
+
+                <div class="anuncio-info">
+                    <h2>{{ anuncio.marca }} {{ anuncio.modelo }}</h2>
+
+                    <p>{{ anuncio.ano }} · {{ anuncio.quilometragem }} km</p>
+
+                    <strong>R$ {{ anuncio.preco }}</strong>
+
+                    <span class="anuncio-status">
+                        {{ anuncio.status|capitalize }}
+                    </span>
+
+                    <div class="anuncio-acoes">
+                        <a href="{{ url_for('detalhes_veiculo', id=anuncio.id) }}">
+                            Ver detalhes
+                        </a>
+
+                        <button type="button"
+                                class="btn-status"
+                                disabled
+                                title="Disponível após integração com o backend">
+                            Pausar / Reativar
+                        </button>
+                    </div>
+                </div>
+            </article>
+            {% else %}
+            <div class="anuncios-vazio">
+                <h2>Nenhum anúncio encontrado</h2>
+                <p>Você ainda não possui anúncios publicados.</p>
+                <a href="{{ url_for('cadastrar_veiculo') }}">
+                    Cadastrar veículo
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
