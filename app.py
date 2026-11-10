@@ -23,7 +23,8 @@ veiculos = [
         "imagem": "m3_competition.webp",
         "quilometragem": "25.500",
         "carroceria": "Sedã",
-        "cor": "Cinza"
+        "cor": "Cinza",
+        "descricao": "cor individual frozen full ppf Outros Opcionais: Comando de áudio no volante, Controle de estabilidade, Direção Elétrica, Distribuição eletrônica de frenagem, Kit Multimídia, Pára-choques na cor do veículo."
     }
 ]
 
@@ -94,7 +95,6 @@ def cadastrar_veiculo():
             "O anúncio ainda não foi cadastrado."
         )
     }), 200
-
 
 
 if __name__ == "__main__":

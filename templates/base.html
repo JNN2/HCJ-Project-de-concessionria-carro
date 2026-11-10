@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{% block title %}HCJ Motors{% endblock %}</title>
 
     <!-- Fontes -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
 
     <!-- Ícones -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-       <!-- CSS principal -->
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}"
-    >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- CSS Cadastro de Veículos -->
+<!-- CSS principal -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- CSS Cadastro de Veículos -->
     {% if request.endpoint == 'cadastrar_veiculo' %}
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/cadastro.css') }}"
-    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+    {% endif %}
+
+
+    <!-- CSS detalhes-veiculo -->
+    {% if request.endpoint == 'detalhes_veiculo' %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/detalhes.css') }}">
     {% endif %}
 
     <!-- CSS específico do catálogo -->
@@ -42,17 +43,11 @@
             <!-- Logo com duas versões -->
             <a href="/" class="logo">
 
-                <img
-                    class="logo-dark"
-                    src="{{ url_for('static', filename='images/logo-hcj-white.png') }}"
-                    alt="HCJ Motors"
-                >
+                <img class="logo-dark" src="{{ url_for('static', filename='images/logo-hcj-white.png') }}"
+                    alt="HCJ Motors">
 
-                <img
-                    class="logo-light"
-                    src="{{ url_for('static', filename='images/logo-hcj-black.png') }}"
-                    alt="HCJ Motors"
-                >
+                <img class="logo-light" src="{{ url_for('static', filename='images/logo-hcj-black.png') }}"
+                    alt="HCJ Motors">
 
                 <div class="logo-name">
                     <strong>HCJ</strong>
@@ -74,7 +69,7 @@
                 </a>
 
                 <a href="{{ url_for('cadastrar_veiculo') }}"
-                class="nav-link {% if request.endpoint == 'cadastrar_veiculo' %}active{% endif %}">
+                    class="nav-link {% if request.endpoint == 'cadastrar_veiculo' %}active{% endif %}">
                     <i class="fa-solid fa-circle-plus"></i>
                     Cadastrar Veículo
                 </a>
@@ -88,16 +83,11 @@
             <!-- Ações -->
             <div class="header-actions">
 
-                <a href="/catalogo" class="icon-button"
-                aria-label="Pesquisar veículos">
+                <a href="/catalogo" class="icon-button" aria-label="Pesquisar veículos">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </a>
 
-                <button
-                    id="theme-toggle"
-                    class="icon-button"
-                    type="button"
-                    aria-label="Alternar tema">
+                <button id="theme-toggle" class="icon-button" type="button" aria-label="Alternar tema">
                     <i class="fa-solid fa-moon"></i>
                 </button>
 
@@ -129,4 +119,5 @@
     {% endif %}
 
 </body>
+
 </html>
