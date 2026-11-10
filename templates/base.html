@@ -4,85 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>{% block title %}HCJ Motors{% endblock %}</title>
-
     <!-- Fontes -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Ícones -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<!-- CSS principal -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-<!-- CSS Cadastro de Veículos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- CSS Cadastro de Veículos -->
     {% if request.endpoint == 'cadastrar_veiculo' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
     {% endif %}
-
-
     <!-- CSS detalhes-veiculo -->
     {% if request.endpoint == 'detalhes_veiculo' %}
     <link rel="stylesheet" href="{{url_for('static', filename='css/detalhes.css') }}">
     {% endif %}
-
     <!-- CSS específico do catálogo -->
     {% if request.endpoint == 'catalogo' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/catalogo.css') }}">
     {% endif %}
-    </head>
+    <!-- CSS específico do anuncios do vendedor -->
+    {% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meus_anuncios.css') }}">
+    {% endblock %}
+
+</head>
 
 <body>
     <!-- CABEÇALHO HCJ MOTORS -->
     <header class="header">
         <div class="container header-content">
-
             <!-- Logo com duas versões -->
             <a href="/" class="logo">
-
-                <img class="logo-dark" src="{{ url_for('static', filename='images/logo-hcj-white.png') }}"
-                    alt="HCJ Motors">
-
-                <img class="logo-light" src="{{ url_for('static', filename='images/logo-hcj-black.png') }}"
-                    alt="HCJ Motors">
-
+                <img class="logo-dark" src="{{ url_for('static', filename='images/logo-hcj-white.png') }}" alt="HCJ Motors">
+                <img class="logo-light" src="{{ url_for('static', filename='images/logo-hcj-black.png') }}" alt="HCJ Motors">
                 <div class="logo-name">
                     <strong>HCJ</strong>
                     <small>2026</small>
                 </div>
             </a>
-
-            <!-- Navegação -->
+            <!-- Navegação principal -->
             <nav class="navbar" aria-label="Menu principal">
 
-                <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">
-                    <i class="fa-solid fa-house"></i>
+                <!-- Início -->
+                <a href="{{ url_for('home') }}"
+                class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
+                {% if request.endpoint == 'home' %}aria-current="page"{% endif %}>
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
                     Início
                 </a>
 
-                <a href="/catalogo" class="nav-link {% if request.path == '/catalogo' %}active{% endif %}">
-                    <i class="fa-solid fa-car-side"></i>
+                <!-- Catálogo -->
+                <a href="{{ url_for('catalogo') }}"
+                class="nav-link {% if request.endpoint == 'catalogo' %}active{% endif %}"
+                {% if request.endpoint == 'catalogo' %}aria-current="page"{% endif %}>
+                    <i class="fa-solid fa-car-side" aria-hidden="true"></i>
                     Catálogo
                 </a>
 
+                <!-- Cadastrar veículo -->
                 <a href="{{ url_for('cadastrar_veiculo') }}"
-                    class="nav-link {% if request.endpoint == 'cadastrar_veiculo' %}active{% endif %}">
-                    <i class="fa-solid fa-circle-plus"></i>
+                class="nav-link {% if request.endpoint == 'cadastrar_veiculo' %}active{% endif %}"
+                {% if request.endpoint == 'cadastrar_veiculo' %}aria-current="page"{% endif %}>
+                    <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
                     Cadastrar Veículo
                 </a>
 
-                <a href="/sobre" class="nav-link">
-                    Sobre
+                <!-- Meus Anúncios -->
+                <a href="{{ url_for('meus_anuncios') }}"
+                class="nav-link {% if request.endpoint == 'meus_anuncios' %}active{% endif %}"
+                {% if request.endpoint == 'meus_anuncios' %}aria-current="page"{% endif %}>
+                    <i class="fa-solid fa-rectangle-list" aria-hidden="true"></i>
+                    Meus Anúncios
                 </a>
 
             </nav>
 
             <!-- Ações -->
             <div class="header-actions">
-
                 <a href="/catalogo" class="icon-button" aria-label="Pesquisar veículos">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </a>
@@ -94,7 +93,6 @@
                 <a href="/login" class="login-button">
                     Entrar
                 </a>
-
             </div>
         </div>
     </header>
@@ -112,11 +110,19 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}" defer></script>
     <!-- JavaScript Cadastro veiculos -->
     {% if request.endpoint == 'cadastrar_veiculo' %}
     <script src="{{ url_for('static', filename='js/cadastro.js') }}" defer></script>
     {% endif %}
+    <!-- JavaScript dos filtros e barra em list ou card -->
+    {% if request.endpoint == 'catalogo' %}
+    <script src="{{ url_for('static', filename='js/catalogo.js') }}" defer></script>
+    {% endif %}
+    <!-- JavaScript Anuncio dos vendedores -->
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/meus_anuncios.js') }}" defer> </script>
+    {% endblock %}
 
 </body>
 

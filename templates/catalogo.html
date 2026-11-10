@@ -1,96 +1,118 @@
 {% extends "base.html" %}
-{% block title %}
-HCJ Motors | Catálogo de Veículos
-{% endblock %}
+{% block title %}HCJ Motors | Catálogo de Veículos{% endblock %}
 {% block content %}
 <section class="catalogo">
-    <div class="container">
 
-        <h1>Catálogo de <span>Veículos</span></h1>
-        <p>Encontre o carro perfeito para você.</p>
+  <div class="container">
+    <h1>Catálogo de <span>Veículos</span></h1>
+    <p>Encontre o carro perfeito para você.</p>
 
-    <form class="form-busca" method="GET">
-            <input type="text" name="busca" placeholder="Buscar por modelo, marca...">
-            <button type="submit"> <i class="fas fa-search"></i>Buscar</button>
-        
+    <form id="form-filtros" class="catalogo-form" action="{{ url_for('catalogo') }}" method="GET">
+
+      <div class="form-busca">
+        <input type="search" name="busca" placeholder="Buscar por modelo, marca..." value="{{ request.args.get('busca', '') }}" aria-label="Pesquisar veículos">
+
         <div class="filtros">
-            <select name="localizacao">
-                <option value="">Todas as localizações</option>
+          <select name="localizacao" aria-label="Localização">
+            <option value="">Todas as localizações</option>
+            {% for local in localizacoes %}
+            <option value="{{ local }}" {% if request.args.get('localizacao') == local %}selected{% endif %}>{{ local }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button type="submit"><i class="fas fa-search" aria-hidden="true"></i> Buscar</button>
+
+      </div>
+
+      <div class="catalogo-layout">
+
+        <aside class="catalogo-sidebar" aria-label="Filtros de veículos">
+          <div class="filtro-grupo">
+            <label for="filtro-marca">Marca</label>
+            <select id="filtro-marca" name="marca">
+              <option value="">Todas as marcas</option>
+              {% for marca in marcas %}
+              <option value="{{ marca }}" {% if request.args.get('marca') == marca %}selected{% endif %}>{{ marca }}</option>
+              {% endfor %}
             </select>
+
+          </div>
+
+          <div class="filtro-grupo">
+
+            <label for="filtro-modelo">Modelo</label>
+            <select id="filtro-modelo" name="modelo">
+              <option value="">Todos os modelos</option>
+              {% for modelo in modelos %}
+              <option value="{{ modelo }}" {% if request.args.get('modelo') == modelo %}selected{% endif %}>{{ modelo }}</option>
+              {% endfor %}
+            </select>
+
+          </div>
+
+          <div class="filtro-grupo">
+
+            <h3>Ano</h3>
+            <div class="ano-valores"><output id="ano-minimo-valor" for="ano-minimo">{{ request.args.get('ano_minimo', '2000') }}</output><output id="ano-maximo-valor" for="ano-maximo">{{ request.args.get('ano_maximo', '2027') }}</output></div>
+            <div class="ano-controles">
+              <input type="range" id="ano-minimo" name="ano_minimo" min="1990" max="2027" value="{{ request.args.get('ano_minimo', '2000') }}" aria-label="Ano mínimo">
+              <input type="range" id="ano-maximo" name="ano_maximo" min="1990" max="2027" value="{{ request.args.get('ano_maximo', '2027') }}" aria-label="Ano máximo">
+
+            </div>
+
+          </div>
+          <div class="filtro-grupo">
+            <label for="km-maxima">Quilometragem máxima (km)</label>
+            <input id="km-maxima" name="km_maxima" type="number" min="0" step="1" placeholder="Ex.: 50000" value="{{ request.args.get('km_maxima', '') }}">
+          </div>
+
+          <div class="filtro-grupo">
+            <label for="preco-minimo">Preço mínimo (R$)</label>
+            <input id="preco-minimo" name="preco_minimo" type="number" min="0" step="0.01" placeholder="Ex.: 20000" value="{{ request.args.get('preco_minimo', '') }}">
+          </div>
+
+          <div class="filtro-grupo">
+            <label for="preco-maximo">Preço máximo (R$)</label>
+            <input id="preco-maximo" name="preco_maximo" type="number" min="0" step="0.01" placeholder="Ex.: 100000" value="{{ request.args.get('preco_maximo', '') }}">
+          </div>
+
+          <button class="filtros-aplicar" type="submit">Aplicar filtros</button>
+          <a class="filtros-limpar" href="{{ url_for('catalogo') }}">Limpar filtros</a>
+
+        </aside>
+
+        <div class="catalogo-conteudo">
+
+          <div class="catalogo-visualizacao" aria-label="Modo de visualização">
+            <button type="button" class="visualizacao-grade" aria-label="Visualizar em grade" aria-pressed="true"><i class="fas fa-th" aria-hidden="true"></i></button>
+            <button type="button" class="visualizacao-lista" aria-label="Visualizar em lista" aria-pressed="false"><i class="fas fa-list" aria-hidden="true"></i></button>
+          </div>
+
+          <div class="catalogo-veiculos">
+            {% if veiculos %}
+              {% for veiculo in veiculos %}
+              <article class="veiculo-card">
+                <div class="veiculo-imagem">
+                  <img src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}" loading="lazy">
+                </div>
+                <div class="veiculo-info">
+                  <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
+                  <p>{{ veiculo.ano }} • {{ veiculo.combustivel }} • {{ veiculo.transmissao }}</p>
+                  <p class="veiculo-preco">R$ {{ veiculo.preco }}</p>
+                  <a href="{{ url_for('detalhes_veiculo', id=veiculo.id) }}">Ver detalhes</a>
+                </div>
+                
+              </article>
+              {% endfor %}
+            {% else %}
+              <p>Nenhum veículo encontrado para os filtros selecionados.</p>
+            {% endif %}
+          </div>
         </div>
+      </div>
     </form>
-        <div class="catalogo-layout">
-            <div class="catalogo-sidebar">
-                <div class="filtro-grupo">
-                    <h3>Marca</h3>
-                    <button type="button">Ver mais</button>
-                </div>
-
-                <div class="filtro-grupo">
-                    <h3>Modelo</h3>
-                    <button type="button">Ver mais</button>
-                </div>
-
-                <div class="filtro-grupo">
-                    <h3>Ano</h3>
-
-                    <div class="filtro-ano">
-                        <div class="ano-valores">
-                            <span>2020</span>
-                            <span>2026</span>
-                        </div>
-                    </div>
-
-                    <div class="ano-controles">
-                        <input type="range" name="ano_minimo" min="2000" max="2026" value="2020">
-                        <input type="range" name="ano_maximo" min="2000" max="2026" value="2026">
-                    </div>
-                </div>
-            </div>
-          <div class="catalogo-conteudo">
-                <!-- Controles de visualização -->
-                <div class="catalogo-visualizacao">
-
-                    <button type="button"
-                            class="visualizacao-grade"
-                            title="Visualizar em grade">
-                        <i class="fas fa-th"></i>
-                    </button>
-
-                    <button type="button"
-                            class="visualizacao-lista"
-                            title="Visualizar em lista">
-                        <i class="fas fa-list"></i>
-                    </button>
-                </div>
-                <!-- Lista de veículos -->
-                <div class="catalogo-veiculos">
-                    {% if veiculos %}
-                        {% for veiculo in veiculos %}
-                            <!-- Cartão de cada veículo -->
-                            <div class="veiculo-card">
-                                <div class="veiculo-imagem">
-                                    <img src="{{ url_for('static', filename='images:/' + veiculo.imagem)}}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
-
-                                    <button type="button" class="favorito">
-                                        ♡
-                                    </button>
-                                </div>
-                                <div class="veiculo-info">
-                                    <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
-                                    <p>{{ veiculo.ano }} • {{ veiculo.combustivel }} • {{ veiculo.transmissao }}</p>
-                                    <p class="veiculo-preco">R$ {{ veiculo.preco }}</p>
-
-                                    <a href="#">Ver detalhes</a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>Nenhum veículo disponível no momento.</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </section>
+
 {% endblock %}
