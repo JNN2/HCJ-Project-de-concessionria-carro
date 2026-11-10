@@ -6,22 +6,14 @@ HCJ Motors | Catálogo de Veículos
 <section class="catalogo">
     <div class="container">
 
-        <h1>Catálogo de Veículos</h1>
+        <h1>Catálogo de <span>Veículos</span></h1>
         <p>Encontre o carro perfeito para você.</p>
 
     <form class="form-busca" method="GET">
             <input type="text" name="busca" placeholder="Buscar por modelo, marca...">
-            <button type="submit">Buscar</button>
+            <button type="submit"> <i class="fas fa-search"></i>Buscar</button>
         
         <div class="filtros">
-            <select name="marca">
-                <option value="">Todas as marcas</option>
-            </select>
-
-            <select name="modelo">
-                <option value="">Todos os modelos</option>
-            </select>
-
             <select name="localizacao">
                 <option value="">Todas as localizações</option>
             </select>
@@ -43,8 +35,15 @@ HCJ Motors | Catálogo de Veículos
                     <h3>Ano</h3>
 
                     <div class="filtro-ano">
-                        <input type="range" name="ano_minimo" max="2026" min="2000">
-                        <input type="range" name="ano_maximo" min="2000" max="2026">
+                        <div class="ano-valores">
+                            <span>2020</span>
+                            <span>2026</span>
+                        </div>
+                    </div>
+
+                    <div class="ano-controles">
+                        <input type="range" name="ano_minimo" min="2000" max="2026" value="2020">
+                        <input type="range" name="ano_maximo" min="2000" max="2026" value="2026">
                     </div>
                 </div>
             </div>
@@ -71,7 +70,8 @@ HCJ Motors | Catálogo de Veículos
                             <!-- Cartão de cada veículo -->
                             <div class="veiculo-card">
                                 <div class="veiculo-imagem">
-                                    <img src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}" >
+                                    <img src="{{ url_for('static', filename='images:/' + veiculo.imagem)}}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
+
                                     <button type="button" class="favorito">
                                         ♡
                                     </button>
@@ -80,9 +80,8 @@ HCJ Motors | Catálogo de Veículos
                                     <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
                                     <p>{{ veiculo.ano }} • {{ veiculo.combustivel }} • {{ veiculo.transmissao }}</p>
                                     <p class="veiculo-preco">R$ {{ veiculo.preco }}</p>
-                                    <a href="{{ url_for('detalhes_veiculo', id=veiculo.id) }}">
-                                        Ver detalhes
-                                    </a>
+
+                                    <a href="#">Ver detalhes</a>
                                 </div>
                             </div>
                         {% endfor %}
