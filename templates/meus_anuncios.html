@@ -14,8 +14,7 @@ Meus Anúncios | HCJ Motors
                 <p>Consulte e gerencie seus veículos publicados.</p>
             </div>
 
-            <a href="{{ url_for('cadastrar_veiculo') }}"
-               class="novo-anuncio">
+            <a href="{{ url_for('cadastrar_veiculo') }}" class="novo-anuncio">
                 Novo anúncio
             </a>
         </header>
@@ -26,14 +25,8 @@ Meus Anúncios | HCJ Motors
 
         <div id="lista-anuncios" class="anuncios-grid">
             {% for anuncio in anuncios %}
-            <article class="anuncio-card"
-                     data-id="{{ anuncio.id }}"
-                     data-status="{{ anuncio.status }}">
-
-                <img
-                    src="{{ url_for('static', filename='images/' ~ anuncio.imagem) }}"
-                    alt="{{ anuncio.marca }} {{ anuncio.modelo }}"
-                    loading="lazy"
+            <article class="anuncio-card" data-id="{{ anuncio.id }}" data-status="{{ anuncio.status }}">
+                <img src="{{ url_for('static', filename='images/' ~ anuncio.imagem) }}" alt="{{ anuncio.marca }} {{ anuncio.modelo }}" loading="lazy"
                 >
 
                 <div class="anuncio-info">
@@ -52,11 +45,12 @@ Meus Anúncios | HCJ Motors
                             Ver detalhes
                         </a>
 
-                        <button type="button"
-                                class="btn-status"
-                                disabled
-                                title="Disponível após integração com o backend">
-                            Pausar / Reativar
+                        <button type="button" class="btn-status" data-id="{{ anuncio.id }}" data-status="{{ anuncio.status }}" >
+                            {% if anuncio.status == 'ativo' %}
+                                Pausar
+                            {% else %}
+                                Reativar
+                            {% endif %}
                         </button>
                     </div>
                 </div>
