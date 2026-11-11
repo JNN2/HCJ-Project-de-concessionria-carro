@@ -210,6 +210,81 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
     }
+    // UC16 — Pausar e reativar anúncios
+    lista.addEventListener("click", async (evento) => {
+        const botao = evento.target.closest(".btn-status");
+
+        if (!botao || !lista.contains(botao)) return;
+
+        const card = botao.closest(".anuncio-card");
+        if (!card) return;
+
+        const anuncioId = Number(card.dataset.id);
+        const statusAtual = card.dataset.status;
+
+        if (!Number.isSafeInteger(anuncioId) || anuncioId <= 0) return;
+
+        const novoStatus = statusAtual === "ativo"
+            ? "pausado"
+            : "ativo";
+
+        const acao = novoStatus === "pausado"
+            ? "pausar"
+            : "reativar";
+
+        const confirmado = window.confirm(
+            `Deseja realmente ${acao} este anúncio?`
+        );
+
+        if (!confirmado) return;
+
+        botao.disabled = true;
+
+        try {
+            const resposta = await fetch(
+                `/api/anuncios/${anuncioId}/status`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        status: novoStatus
+                    })
+                }
+            );
+
+            if (!resposta.ok) {
+                throw new Error("Não foi possível atualizar o anúncio.");
+            }
+
+            const dados = await resposta.json();
+
+            if (dados.status !== novoStatus) {
+                throw new Error("Resposta de status inválida.");
+            }
+
+            card.dataset.status = dados.status;
+
+            const etiqueta = card.querySelector(".anuncio-status");
+
+            if (etiqueta) {
+                etiqueta.textContent =
+                    dados.status === "ativo" ? "Ativo" : "Pausado";
+            }
+
+            botao.dataset.status = dados.status;
+            botao.textContent =
+                dados.status === "ativo" ? "Pausar" : "Reativar";
+
+        } catch (erro) {
+            console.error(erro);
+            window.alert("Não foi possível atualizar o anúncio.");
+        } finally {
+            botao.disabled = false;
+        }
+    });
 
     // Por padrão, usa os cards já renderizados pelo Flask.
     atualizarContador();
