@@ -96,6 +96,23 @@ def cadastrar_veiculo():
         )
     }), 200
 
+@app.route("/meus-anuncios")
+def meus_anuncios():
+    # Temporário: somente para testar a interface.
+    # Não representa autenticação real.
+    anuncios = [
+        {
+            **veiculo,
+            "status": "ativo"
+        }
+        for veiculo in veiculos
+    ]
+
+    return render_template(
+        "meus_anuncios.html",
+        anuncios=anuncios
+    )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
