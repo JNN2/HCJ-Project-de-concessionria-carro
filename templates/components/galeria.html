@@ -1,0 +1,57 @@
+<!-- UC12 — Galeria de imagens -->
+{% set fotos = veiculo.imagens | default([], true) %}
+
+{% if not fotos and veiculo.imagem | default(None) %}
+    {% set fotos = [veiculo.imagem] %}
+{% endif %}
+
+<section class="imagens galeria" aria-label="Galeria de imagens do veículo">
+
+    {% if fotos %}
+
+    <div class="galeria-principal">
+        <button type="button" class="galeria-ampliar" aria-label="Ampliar foto do veículo">
+            <img id="galeria-foto-principal" src="{{ url_for('static', filename='images/' ~ fotos[0]) }}"  alt="{{ veiculo.marca }} {{ veiculo.modelo }} — foto 1">
+        </button>
+
+        {% if fotos | length > 1 %}
+        <button type="button" class="galeria-seta galeria-anterior" aria-label="Foto anterior">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+
+        <button type="button" class="galeria-seta galeria-proxima" aria-label="Próxima foto">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+        <span class="galeria-contador" aria-live="polite">
+        1 / {{ fotos | length }}
+        </span>
+        {% endif %}
+    </div>
+
+    {% if fotos | length > 1 %}
+    <div class="galeria-miniaturas" aria-label="Selecionar foto">
+        {% for foto in fotos %}
+        <button type="button" class="galeria-miniatura {% if loop.first %}ativa{% endif %}" data-foto="{{ url_for('static', filename='images/' ~ foto) }}" aria-label="Exibir foto {{ loop.index }} aria-pressed="{{ 'true' if loop.first else 'false' }}">
+            <img src="{{ url_for('static', filename='images/' ~ foto) }}" alt="" loading="lazy">
+        </button>
+        {% endfor %}
+        </div>
+        {% endif %}
+
+        <dialog class="galeria-modal" aria-label="Foto ampliada do veículo">
+            <button type="button" class="galeria-fechar" aria-label="Fechar foto ampliada">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <img class="galeria-modal-imagem" alt="Foto ampliada do veículo">
+        </dialog>
+        {% else %}
+
+        <!-- Imagem padrão quando não há fotos -->
+        <div class="galeria-sem-foto">
+            <img src="{{ url_for('static', filename='images/sem-foto.svg') }}"
+                alt="Veículo sem fotos disponíveis">
+            <p>Este veículo ainda não possui fotos.</p>
+        </div>
+
+        {% endif %}
+</section>

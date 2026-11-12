@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}{{ veiculo.marca }} {{ veiculo.modelo }} | HCJ Motors{% endblock %}
+{% block title %}
+{{ veiculo.marca }} {{ veiculo.modelo }} | HCJ Motors
+{% endblock %}
 
 {% block content %}
+
 <section class="detalhes">
-    <div class="imagens">
-        <img src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}"
-            alt="{{ veiculo.marca }} {{ veiculo.modelo }}, ano {{ veiculo.ano }}">
-    </div>
+
+    <!-- Galeria de imagens -->
+    {% include "components/galeria.html" %}
 
     <div class="detalhes_veiculo">
         <div class="detalhes_veiculo_top">
