@@ -1,194 +1,102 @@
+/* DETALHES DO VEÍCULO */
 .detalhes {
     width: min(100%, 1040px);
     margin: 40px auto 72px;
     padding: 0 24px;
 }
 
-.imagens {
-    overflow: hidden;
+.imagens, .interesse {
     border: 1px solid var(--border);
     border-radius: 16px;
-    background: var(--card);
 }
 
-.imagens img {
-    display: block;
-    width: 100%;
-    max-height: 560px;
-    object-fit: cover;
-}
+.imagens { overflow: hidden; background: var(--card); }
+.detalhes_veiculo_top { margin: 32px 0 24px; }
+.detalhes_veiculo_top h1 { margin: 0; font: 700 clamp(1.75rem, 3vw, 2.5rem)/1.2 var(--font-title); }
+.modelo { color: var(--primary); }
+.preco { margin: 10px 0 0; color: var(--text); font-size: 1.6rem; font-weight: 700; }
 
-.detalhes_veiculo_top {
-    margin: 32px 0 24px;
-}
+/* GALERIA — UC12 */
+.galeria-principal { position: relative; background: var(--card); }
+.galeria-ampliar { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.galeria-ampliar img { display: block; width: 100%; height: clamp(260px, 50vw, 560px); object-fit: contain; }
 
-.detalhes_veiculo_top h1 {
-    margin: 0;
-    font: 700 clamp(1.75rem, 3vw, 2.5rem)/1.2 var(--font-title);
-}
-
-.modelo {
-    color: var(--primary);
-}
-
-.preco {
-    margin: 10px 0 0;
-    color: var(--text);
-    font-size: 1.6rem;
-    font-weight: 700;
-}
-
-.detalhes_veiculo_lista {
+.galeria-seta {
+    position: absolute;
+    top: 50%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.detalhes_veiculo_item_lista {
-    min-width: 0;
-    padding: 18px 20px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
-}
-
-.detalhes_veiculo_item_lista h2 {
-    margin: 0 0 8px;
-    color: var(--text-muted-current);
-    font-size: .85rem;
-    font-weight: 500;
-}
-
-.detalhes_veiculo_item_lista strong {
-    overflow-wrap: anywhere;
-    font-size: 1rem;
-}
-
-.descricao {
-    margin-top: 40px;
-}
-
-.descricao h2,
-.interesse h2 {
-    margin: 0 0 12px;
-    font: 700 1.4rem/1.3 var(--font-title);
-}
-
-#descricao {
-    max-width: 760px;
-    margin: 0;
-    color: var(--text-muted-current);
-    line-height: 1.7;
-}
-
-.interesse {
-    margin-top: 40px;
-    padding: 28px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    background: var(--surface);
-}
-
-.interesse > p {
-    margin: 0 0 24px;
-    color: var(--text-muted-current);
-    line-height: 1.5;
-}
-
-.interesse-form {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-}
-
-.interesse-campo {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.interesse-campo:first-child,
-.interesse-campo-mensagem {
-    grid-column: 1 / -1;
-}
-
-.interesse-campo label {
-    font-size: .85rem;
-    font-weight: 600;
-}
-
-.interesse-campo input,
-.interesse-campo textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--card);
-    color: var(--text);
-    font: inherit;
-}
-
-.interesse-campo textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.interesse-campo textarea::placeholder {
-    color: var(--text-muted-current);
-}
-
-.interesse-enviar {
-    width: fit-content;
-    min-height: 42px;
-    padding: 10px 22px;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    transform: translateY(-50%);
     border: 0;
-    border-radius: var(--radius-pill);
-    background: var(--primary);
+    border-radius: 50%;
+    background: rgb(0 0 0 / 75%);
     color: #fff;
-    font-weight: 700;
+    cursor: pointer;
     transition: background-color var(--transition);
 }
 
-.interesse-enviar:hover {
-    background: var(--primary-hover);
-}
+.galeria-seta:hover { background: var(--primary); }
+.galeria-anterior { left: 16px; }
+.galeria-proxima { right: 16px; }
+.galeria-contador { position: absolute; right: 16px; bottom: 16px; padding: 6px 12px; border-radius: 20px; background: rgb(0 0 0 / 75%); color: #fff; font-size: .85rem; }
 
+.galeria-miniaturas { display: flex; gap: 12px; padding: 14px; overflow-x: auto; border-top: 1px solid var(--border); }
+.galeria-miniatura { flex: 0 0 96px; height: 72px; padding: 0; overflow: hidden; border: 2px solid transparent; border-radius: 8px; background: var(--surface); opacity: .7; cursor: pointer; }
+.galeria-miniatura:hover, .galeria-miniatura.ativa { opacity: 1; }
+.galeria-miniatura.ativa { border-color: var(--primary); }
+.galeria-miniatura img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.galeria-modal { position: fixed; inset: 0; width: min(96vw, 1100px); max-width: none; max-height: 95vh; padding: 48px 16px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); color: var(--text); }
+.galeria-modal::backdrop { background: rgb(0 0 0 / 90%); }
+.galeria-modal-imagem { display: block; width: auto; max-width: 100%; max-height: calc(95vh - 70px); margin: auto; object-fit: contain; }
+.galeria-fechar { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; color: var(--text); font-size: 24px; cursor: pointer; }
+.galeria-sem-foto { display: grid; justify-items: center; align-content: center; gap: 12px; min-height: 300px; padding: 24px; color: var(--text-muted-current); text-align: center; }
+.galeria-sem-foto img { width: 110px; height: 110px; object-fit: contain; }
+.galeria-sem-foto p { margin: 0; }
+.galeria button:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+/* CARACTERÍSTICAS */
+.detalhes_veiculo_lista { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.detalhes_veiculo_item_lista { min-width: 0; padding: 18px 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.detalhes_veiculo_item_lista h2 { margin: 0 0 8px; color: var(--text-muted-current); font-size: .85rem; font-weight: 500; }
+.detalhes_veiculo_item_lista strong { overflow-wrap: anywhere; font-size: 1rem; }
+
+/* DESCRIÇÃO E INTERESSE */
+.descricao, .interesse { margin-top: 40px; }
+.descricao h2, .interesse h2 { margin: 0 0 12px; font: 700 1.4rem/1.3 var(--font-title); }
+#descricao { max-width: 760px; margin: 0; color: var(--text-muted-current); line-height: 1.7; }
+
+.interesse { padding: 28px; background: var(--surface); }
+.interesse > p { margin: 0 0 24px; color: var(--text-muted-current); line-height: 1.5; }
+.interesse-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.interesse-campo { display: flex; flex-direction: column; gap: 8px; }
+.interesse-campo:first-child, .interesse-campo-mensagem { grid-column: 1 / -1; }
+.interesse-campo label { font-size: .85rem; font-weight: 600; }
+.interesse-campo input, .interesse-campo textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); font: inherit; }
+.interesse-campo textarea { min-height: 120px; resize: vertical; }
+.interesse-campo textarea::placeholder { color: var(--text-muted-current); }
+.interesse-enviar { width: fit-content; min-height: 42px; padding: 10px 22px; border: 0; border-radius: var(--radius-pill); background: var(--primary); color: #fff; font-weight: 700; transition: background-color var(--transition); }
+.interesse-enviar:hover { background: var(--primary-hover); }
+
+/* RESPONSIVIDADE */
 @media (max-width: 700px) {
-    .detalhes_veiculo_lista {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    .detalhes_veiculo_lista { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 480px) {
-    .detalhes {
-        margin: 24px auto 48px;
-        padding: 0 16px;
-    }
-
-    .imagens {
-        border-radius: 12px;
-    }
-
-    .detalhes_veiculo_top {
-        margin-top: 24px;
-    }
-
-    .detalhes_veiculo_lista {
-        gap: 10px;
-    }
-
-    .detalhes_veiculo_item_lista {
-        padding: 14px;
-    }
-
-    .interesse {
-        padding: 20px;
-    }
-
-    .interesse-form {
-        grid-template-columns: 1fr;
-    }
+    .detalhes { margin: 24px auto 48px; padding: 0 16px; }
+    .imagens { border-radius: 12px; }
+    .galeria-ampliar img { height: 260px; }
+    .galeria-seta { width: 36px; height: 36px; }
+    .galeria-anterior { left: 10px; }
+    .galeria-proxima { right: 10px; }
+    .galeria-miniaturas { gap: 8px; padding: 10px; }
+    .galeria-miniatura { flex-basis: 76px; height: 56px; }
+    .detalhes_veiculo_top { margin-top: 24px; }
+    .detalhes_veiculo_lista { gap: 10px; }
+    .detalhes_veiculo_item_lista { padding: 14px; }
+    .interesse { padding: 20px; }
+    .interesse-form { grid-template-columns: 1fr; }
 }
