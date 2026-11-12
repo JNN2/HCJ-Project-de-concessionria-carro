@@ -47,10 +47,11 @@ def catalogo():
 # Detalhes do veículo
 @app.route("/detalhes/<int:id>")
 def detalhes_veiculo(id):
-    veiculo = next(
-        (v for v in veiculos if v["id"] == id),
-        None
-    )
+    veiculo = None
+    for v in veiculos:
+        if v["id"] == id:
+            veiculo = v
+            break
 
     if veiculo is None:
         abort(404)
@@ -95,6 +96,7 @@ def cadastrar_veiculo():
             "O anúncio ainda não foi cadastrado."
         )
     }), 200
+
 
 @app.route("/meus-anuncios")
 def meus_anuncios():
