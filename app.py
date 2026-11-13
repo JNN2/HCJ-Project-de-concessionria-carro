@@ -47,7 +47,16 @@ def home():
 @app.route("/catalogo")
 def catalogo():
     veiculos = carregar_veiculos()
-    return render_template("catalogo.html", veiculos=veiculos)
+    
+    return render_template(
+        "catalogo.html",
+        veiculos=veiculos
+    )
+
+@app.route("/api/veiculos")
+def api_veiculos():
+    veiculos = carregar_veiculos()
+    return jsonify(veiculos)
 
 # Detalhes do veículo
 @app.route("/detalhes/<int:id>")
