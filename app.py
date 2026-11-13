@@ -1,5 +1,18 @@
 from flask import (Flask, abort, jsonify, render_template, request)
 import os
+import csv
+
+def carregar_veiculos():
+    veiculos = []
+    caminho = os.path.join(os.path.dirname(__file__), "data", "veiculos.csv")
+
+    with open(caminho, "r", encoding="utf-8") as arquivo:
+        leitor = csv.DictReader(arquivo, delimiter=";")
+
+        for veiculo in leitor:
+            veiculos.append(veiculo)
+
+    return veiculos
 
 app = Flask(__name__)
 # Necessária para mensagens flash e sessões.
@@ -38,6 +51,7 @@ def home():
 # Catálogo de veículos
 @app.route("/catalogo")
 def catalogo():
+    veiculos = carregar_veiculos()
     return render_template(
         "catalogo.html",
         veiculos=veiculos
