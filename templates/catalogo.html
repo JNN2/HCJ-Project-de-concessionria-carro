@@ -26,7 +26,6 @@
       </div>
 
       <div class="catalogo-layout">
-
         <aside class="catalogo-sidebar" aria-label="Filtros de veículos">
           <div class="filtro-grupo">
             <label for="filtro-marca">Marca</label>
@@ -36,7 +35,6 @@
               <option value="{{ marca }}" {% if request.args.get('marca') == marca %}selected{% endif %}>{{ marca }}</option>
               {% endfor %}
             </select>
-
           </div>
 
           <div class="filtro-grupo">
@@ -79,7 +77,6 @@
 
           <button class="filtros-aplicar" type="submit">Aplicar filtros</button>
           <a class="filtros-limpar" href="{{ url_for('catalogo') }}">Limpar filtros</a>
-
         </aside>
 
         <div class="catalogo-conteudo">
@@ -94,15 +91,17 @@
               {% for veiculo in veiculos %}
               <article class="veiculo-card">
                 <div class="veiculo-imagem">
-                  <img src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}" loading="lazy">
+                  <img src="{{ url_for('static', filename=veiculo.imagem.replace('static/', '')) }}"
+                    alt="{{ veiculo.marca }} {{ veiculo.modelo }}"
+                    loading="lazy">
                 </div>
+
                 <div class="veiculo-info">
                   <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
                   <p>{{ veiculo.ano }} • {{ veiculo.combustivel }} • {{ veiculo.transmissao }}</p>
                   <p class="veiculo-preco">R$ {{ veiculo.preco }}</p>
                   <a href="{{ url_for('detalhes_veiculo', id=veiculo.id) }}">Ver detalhes</a>
-                </div>
-                
+                  </div>
               </article>
               {% endfor %}
             {% else %}
