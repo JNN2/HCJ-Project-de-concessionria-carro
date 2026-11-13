@@ -91,9 +91,8 @@
               {% for veiculo in veiculos %}
               <article class="veiculo-card">
                 <div class="veiculo-imagem">
-                  <img src="{{ url_for('static', filename=veiculo.imagem.replace('static/', '')) }}"
-                    alt="{{ veiculo.marca }} {{ veiculo.modelo }}"
-                    loading="lazy">
+                  <img src="{{ url_for('static', filename='images/' ~ veiculo.imagem) }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}" loading="lazy"
+                  >
                 </div>
 
                 <div class="veiculo-info">

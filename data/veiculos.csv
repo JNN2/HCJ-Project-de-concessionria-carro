@@ -1,1 +1,2 @@
-id;marca;modelo;ano;combustivel;transmissao;preco;imagem;quilometragem;carroceria;cor;descricao;localizacao;status
+id;marca;modelo;ano;combustivel;transmissao;preco;imagem;imagens;quilometragem;carroceria;cor;descricao;localizacao;status
+1;BMW;M3 Competition;2022;Gasolina;Automático;489.900,00;bmw-m3.jpg;bmw-m3.jpg|bmw-m3-01.jpg|bmw-m3-02.jpg;25.500;Sedã;Cinza;BMW M3 Competition 2022 com pacote esportivo;João Pessoa - PB;ativo
