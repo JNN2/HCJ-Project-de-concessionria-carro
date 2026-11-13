@@ -123,6 +123,10 @@
     {% block scripts %}
     <script src="{{ url_for('static', filename='js/meus_anuncios.js') }}" defer> </script>
     {% endblock %}
+    <!-- JavaScript da galeria -->
+    {% if request.endpoint == 'detalhes_veiculo' %}
+    <script src="{{ url_for('static', filename='js/detalhes_galeria.js') }}" defer></script>
+    {% endif %}
 
 </body>
 

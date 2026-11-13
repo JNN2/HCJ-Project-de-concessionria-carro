@@ -33,7 +33,11 @@ veiculos = [
         "combustivel": "Gasolina",
         "transmissao": "Automático",
         "preco": "489.900,00",
-        "imagem": "m3_competition.webp",
+        "imagens": [
+            "bmw-m3.jpg",
+            "bmw-m3-01.jpg",
+            "bmw-m3-02.jpg"
+        ],
         "quilometragem": "25.500",
         "carroceria": "Sedã",
         "cor": "Cinza",
