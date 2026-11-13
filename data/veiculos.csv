@@ -1,2 +1,5 @@
-id;marca;modelo;ano;combustivel;transmissao;preco;imagem;imagens;quilometragem;carroceria;cor;descricao;localizacao;status
-1;BMW;M3 Competition;2022;Gasolina;Automático;489.900,00;bmw-m3.jpg;bmw-m3.jpg|bmw-m3-01.jpg|bmw-m3-02.jpg;25.500;Sedã;Cinza;BMW M3 Competition 2022 com pacote esportivo;João Pessoa - PB;ativo
+id,marca,modelo,ano,combustivel,transmissao,preco,imagem,imagens,quilometragem,carroceria,cor,descricao,localizacao,status
+1,BMW,M3 Competition,2022,Gasolina,Automático,"489.900,00",bmw-m3.jpg,bmw-m3.jpg|bmw-m3-01.jpg|bmw-m3-02.jpg,25.500,Sedã,Cinza,BMW M3 Competition 2022 com pacote esportivo,João Pessoa - PB,ativo
+2,audi,A3,2014,gasolina,automático,59.800,audia3-01.jpg,audia3-01.jpg|audia3-02.jpg|audia3-03.jpg,149.000,Sedã,branco,Audi A3 stage 3,Brasília - DF,ativo
+3,Honda,CIVIC,2024,gasolina e elétrico,automático,189.590,civic-01.jpg,civic-01.jpg|civic-02.jpg|civic-03.jpg,36.905,Sedã,preto,Honda Civic original de fabrica,São Paulo - SP,ativo
+4,Cadillac,Escalade,2023,gasolina,automático,1.149.900,escalade-01.jpg,escalade-01.jpg|escalade-02.jpg|escalade-03.jpg,33.602,Utilitário esportivo,preto,Cadillac Escalade blindada,Araraguá - SC,ativo
