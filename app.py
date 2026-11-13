@@ -4,14 +4,28 @@ import csv
 
 def carregar_veiculos():
     veiculos = []
-    caminho = os.path.join(os.path.dirname(__file__), "data", "veiculos.csv")
-
-    with open(caminho, "r", encoding="utf-8") as arquivo:
+    caminho = os.path.join(
+        os.path.dirname(__file__), "data", "veiculos.csv"
+    )
+    with open(caminho, "r", encoding="utf-8-sig", newline="") as arquivo:
         leitor = csv.DictReader(arquivo, delimiter=";")
 
         for veiculo in leitor:
-            veiculos.append(veiculo)
+            veiculo["id"] = int(veiculo["id"])
+            # Converte as imagens do CSV em uma lista Python
+            fotos = veiculo.get("imagens", "").strip()
+            veiculo["imagens"] = [
+                foto.strip()
+                for foto in fotos.split("|")
+                if foto.strip()
+            ]
+            # Se não houver galeria, usa a imagem principal
+            imagem = veiculo.get("imagem", "").strip()
 
+            if not veiculo["imagens"] and imagem:
+                veiculo["imagens"] = [imagem]
+
+            veiculos.append(veiculo)
     return veiculos
 
 app = Flask(__name__)
@@ -21,29 +35,6 @@ app.config["SECRET_KEY"] = os.environ.get(
     "FLASK_SECRET_KEY",
     "chave-apenas-para-desenvolvimento-local"
 )
-
-# Dados temporários para testar o catálogo.
-# Posteriormente serão carregados do armazenamento.
-veiculos = [
-    {
-        "id": 1,
-        "marca": "BMW",
-        "modelo": "M3 Competition",
-        "ano": 2022,
-        "combustivel": "Gasolina",
-        "transmissao": "Automático",
-        "preco": "489.900,00",
-        "imagens": [
-            "bmw-m3.jpg",
-            "bmw-m3-01.jpg",
-            "bmw-m3-02.jpg"
-        ],
-        "quilometragem": "25.500",
-        "carroceria": "Sedã",
-        "cor": "Cinza",
-        "descricao": "cor individual frozen full ppf Outros Opcionais: Comando de áudio no volante, Controle de estabilidade, Direção Elétrica, Distribuição eletrônica de frenagem, Kit Multimídia, Pára-choques na cor do veículo."
-    }
-]
 
 
 # Página inicial
@@ -56,21 +47,15 @@ def home():
 @app.route("/catalogo")
 def catalogo():
     veiculos = carregar_veiculos()
-    return render_template(
-        "catalogo.html",
-        veiculos=veiculos
-    )
-
+    return render_template("catalogo.html", veiculos=veiculos)
 
 # Detalhes do veículo
 @app.route("/detalhes/<int:id>")
 def detalhes_veiculo(id):
-    veiculo = None
-    for v in veiculos:
-        if v["id"] == id:
-            veiculo = v
-            break
-
+    veiculo = next(
+        (v for v in carregar_veiculos() if v["id"] == id),
+        None
+    )
     if veiculo is None:
         abort(404)
 
@@ -78,7 +63,6 @@ def detalhes_veiculo(id):
         "detalhes_veiculo.html",
         veiculo=veiculo
     )
-
 
 # Formulário de cadastro de veículos
 @app.route("/cadastrar-veiculo", methods=["GET", "POST"])
@@ -118,21 +102,13 @@ def cadastrar_veiculo():
 
 @app.route("/meus-anuncios")
 def meus_anuncios():
-    # Temporário: somente para testar a interface.
-    # Não representa autenticação real.
-    anuncios = [
-        {
-            **veiculo,
-            "status": "ativo"
-        }
-        for veiculo in veiculos
-    ]
-
+    veiculos = carregar_veiculos()
+    # Temporário: ainda não existe filtro por vendedor autenticado
+    anuncios = veiculos
     return render_template(
         "meus_anuncios.html",
         anuncios=anuncios
     )
-
 
 if __name__ == "__main__":
     app.run(debug=True)
