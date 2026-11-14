@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/detalhes.css') }}">
     {% endif %}
     <!-- CSS específico do catálogo -->
-    {% if request.endpoint == 'catalogo' %}
+    {% if request.endpoint in ['catalogo' , 'resultados_pesquisa'] %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/catalogo.css') }}">
     {% endif %}
     <!-- CSS específico do anuncios do vendedor -->
@@ -116,7 +116,7 @@
     <script src="{{ url_for('static', filename='js/cadastro.js') }}" defer></script>
     {% endif %}
     <!-- JavaScript dos filtros e barra em list ou card -->
-    {% if request.endpoint == 'catalogo' %}
+    {% if request.endpoint in ['catalogo' , 'resultados_pesquisa'] %}
     <script src="{{ url_for('static', filename='js/catalogo.js') }}" defer></script>
     {% endif %}
     <!-- JavaScript Anuncio dos vendedores -->
