@@ -7,7 +7,7 @@
     <h1>Catálogo de <span>Veículos</span></h1>
     <p>Encontre o carro perfeito para você.</p>
 
-    <form id="form-filtros" class="catalogo-form" action="{{ url_for('catalogo') }}" method="GET">
+    <form id="form-filtros" class="catalogo-form" action="{{ url_for('resultados_pesquisa') }}" method="GET">
 
       <div class="form-busca">
         <input type="search" name="busca" placeholder="Buscar por modelo, marca..." value="{{ request.args.get('busca', '') }}" aria-label="Pesquisar veículos">

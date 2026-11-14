@@ -53,6 +53,23 @@ def catalogo():
         veiculos=veiculos
     )
 
+# Resultados da pesquisa
+@app.route("/resultados-pesquisa")
+def resultados_pesquisa():
+    termo = request.args.get("busca", "").strip().lower()
+    veiculos = carregar_veiculos()
+
+    resultados = [
+        veiculo for veiculo in veiculos
+        if termo in veiculo["marca"].lower()
+        or termo in veiculo["modelo"].lower()
+    ]
+
+    return render_template(
+        "catalogo.html",
+        veiculos=resultados
+    )
+
 @app.route("/api/veiculos")
 def api_veiculos():
     veiculos = carregar_veiculos()
