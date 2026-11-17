@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
         combustivel: form.querySelector("#combustivel"),
         transmissao: form.querySelector("#transmissao"),
         localizacao: form.querySelector("#localizacao"),
+        carroceria: form.querySelector("#carroceria"),
+        cor: form.querySelector("#cor"),
         descricao: form.querySelector("#descricao"),
         fotos: form.querySelector("#fotos")
     };
-
     const botaoEnviar = form.querySelector(".cadastro-btn-enviar");
     const botaoLimpar = form.querySelector(".cadastro-btn-limpar");
     const LIMITE_FOTOS = 8;
