@@ -30,6 +30,17 @@ Cadastrar Veículo | HCJ Motors
                             <option value="Hyundai">Hyundai</option>
                             <option value="Toyota">Toyota</option>
                             <option value="Volkswagen">Volkswagen</option>
+                            <option value="BYD">BYD</option>
+                            <option value="GWM">GWM</option>
+                            <option value="Jeep">Jeep</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Renault">Renault</option>
+                            <option value="Volvo">Volvo</option>
+                            <option value="Ferrari">Ferrari</option>
+                            <option value="McLaren">McLaren</option>
+                            <option value="Lamborghini">Lamborghini</option>
                             <option value="Outra">Outra</option>
                         </select>
                     </div>
@@ -94,12 +105,26 @@ Cadastrar Veículo | HCJ Motors
                     </div>
 
                     <div class="cadastro-campo">
-                        <label for="descricao">
-                            Descrição <span>*</span>
-                        </label>
-                        <textarea id="descricao" name="descricao" placeholder="Fale sobre o veículo..." maxlength="500" rows="6" required>
-                        </textarea>
-                        <small>Máximo de 500 caracteres.</small>
+                        <label for="carroceria">Carroceria <span>*</span></label>
+                        <select id="carroceria" name="carroceria" required>
+                            <option value="">Selecione a carroceria</option>
+                            <option value="Sedã">Sedã</option>
+                            <option value="Hatch">Hatch</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Picape">Picape</option>
+                            <option value="Cupê">Cupê</option>
+                            <option value="Conversível">Conversível</option>
+                        </select>
+                    </div>
+
+                    <div class="cadastro-campo">
+                        <label for="cor">Cor <span>*</span></label>
+                        <input type="text" id="cor" name="cor" placeholder="Ex.: Cinza" maxlength="40" required
+                        >
+                    </div>
+                    <div class="cadastro-campo">
+                        <label for="quilometragem">Quilometragem (km) <span>*</span></label>
+                        <input type="number" id="quilometragem" name="quilometragem" min="0" step="1" placeholder="Ex.: 25500" required>
                     </div>
                 </div>
             </div>
@@ -109,14 +134,12 @@ Cadastrar Veículo | HCJ Motors
                 <label for="fotos" class="cadastro-fotos-titulo">
                     <i class="fa-solid fa-images" aria-hidden="true"></i> Fotos do Veículo
                 </label>
-
                 <label for="fotos" class="cadastro-upload">
                     <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
                     <strong>Selecione as imagens do veículo</strong>
                     <small> JPG, PNG ou WEBP — até 8 fotos de 5 MB cada
                     </small>
                 </label>
-
                 <input type="file" id="fotos" name="fotos" accept="image/jpeg,image/png,image/webp" multiple class="cadastro-file-input">
             </div>
             <!-- AÇÕES -->
