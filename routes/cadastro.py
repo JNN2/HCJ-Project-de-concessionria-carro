@@ -38,6 +38,32 @@ CAMPOS = {
     "descricao": "Descrição",
 }
 
+def resposta_cadastro(sucesso, mensagem, status, erros=None, anuncio_id=None):
+    """
+    Padroniza as respostas da rota de cadastro.
+
+    sucesso: indica se o cadastro funcionou.
+    mensagem: texto exibido ao usuário.
+    status: código HTTP da resposta.
+    erros: erros específicos de cada campo.
+    anuncio_id: ID do anúncio criado.
+    """
+
+    resposta = {
+        "sucesso": sucesso,
+        "mensagem": mensagem
+    }
+
+    # Inclui os erros quando existirem.
+    if erros is not None:
+        resposta["erros"] = erros
+
+    # Inclui o ID somente após um cadastro concluído.
+    if anuncio_id is not None:
+        resposta["anuncio_id"] = anuncio_id
+
+    return jsonify(resposta), status
+
 def cadastrar_veiculo():
     # GET: apresenta a página de cadastro.
     if request.method == "GET":
@@ -47,10 +73,11 @@ def cadastrar_veiculo():
     usuario_id = session.get("usuario_id")
 
     if not usuario_id:
-        return jsonify({
-            "sucesso": False,
-            "mensagem": "Faça login para cadastrar um anúncio."
-        }), 401
+        return resposta_cadastro(
+            sucesso=False,
+            mensagem="Faça login para cadastrar um anúncio.",
+            status=401
+        )
     # Recebe os campos enviados pelo JavaScript.
     dados = {
         campo: request.form.get(campo, "").strip()
@@ -127,11 +154,12 @@ def cadastrar_veiculo():
             )
     # Retorna os erros ao cadastro.js.
     if erros:
-        return jsonify({
-            "sucesso": False,
-            "mensagem": next(iter(erros.values())),
-            "erros": erros,
-        }), 400
+        return resposta_cadastro(
+            sucesso=False,
+            mensagem=next(iter(erros.values())),
+            status=400,
+            erros=erros
+        )
     # Recebe as fotos enviadas pelo formulário.
     # O input deve utilizar name="fotos".
     arquivos = [
@@ -142,11 +170,12 @@ def cadastrar_veiculo():
     # Verifica as fotos antes de salvar.
     erro_fotos = validar_fotos(arquivos)
     if erro_fotos:
-        return jsonify({
-            "sucesso": False,
-            "mensagem": erro_fotos,
-            "erros": {"fotos": erro_fotos}
-        }), 400
+        return resposta_cadastro(
+            sucesso=False,
+            mensagem=erro_fotos,
+            status=400,
+            erros={"fotos": erro_fotos}
+        )
     # Prepara os dados para o CSV.
     anuncio = dados.copy()
     # Mantém o formato de preço esperado pelo app.py.
@@ -174,16 +203,18 @@ def cadastrar_veiculo():
         # Remove as fotos se o cadastro falhar.
         remover_fotos(nomes)
         current_app.logger.exception( "Falha ao persistir anúncio")
-        return jsonify({
-            "sucesso": False,
-            "mensagem": "Não foi possível salvar o anúncio."
-        }), 500
+        return resposta_cadastro(
+            sucesso=False,
+            mensagem="Não foi possível salvar o anúncio. Tente novamente.",
+            status=500
+        )
     # HTTP 201: anúncio criado.
-    return jsonify({
-        "sucesso": True,
-        "mensagem": "Anúncio cadastrado com sucesso!",
-        "anuncio_id": novo_id
-    }), 201
+    return resposta_cadastro(
+        sucesso=True,
+        mensagem="Anúncio cadastrado com sucesso!",
+        status=201,
+        anuncio_id=novo_id
+    )
 
 def registrar_rotas_cadastro(app):
     # Registra a rota no app.py sem duplicá-la.
