@@ -59,6 +59,9 @@ app.config["SECRET_KEY"] = os.environ.get(
 )
 # Rota de cadastro de viuculos
 registrar_rotas_cadastro(app)
+# Limita o tamanho total dos dados enviados.
+# Até 8 imagens de 5 MB, mais os dados do formulário.
+app.config["MAX_CONTENT_LENGTH"] = 42 * 1024 * 1024
 
 # Página inicial
 @app.route("/")

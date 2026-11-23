@@ -1,1 +1,6 @@
+# Passo 1: py -3 -m venv .venv
+# Passo 2: pip install Flask
+# Pasoo 3: pip install -r requirements.txt
+
 Flask
+Pillow
