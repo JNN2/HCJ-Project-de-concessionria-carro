@@ -90,6 +90,16 @@ def detalhes_veiculo(id):
         veiculo=veiculo
     )
 
+@app.route('/editar-anuncio/<int:id>')
+def editar_anuncio(id):
+    veiculos = carregar_veiculos()
+    veiculo = next((v for v in veiculos if v['id'] == id), None)
+    
+    if veiculo is None:
+        abort(404)
+
+    return render_template('editar_anuncio.html', veiculo=veiculo)
+
 # Formulário de cadastro de veículos
 @app.route("/cadastrar-veiculo", methods=["GET", "POST"])
 def cadastrar_veiculo():
