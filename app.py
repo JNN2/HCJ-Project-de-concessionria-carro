@@ -1,5 +1,6 @@
 from flask import (Flask, abort, jsonify, render_template, request)
 from routes.cadastro import registrar_rotas_cadastro
+from routes.anuncios import registrar_rotas_anuncios
 import os
 import csv
 
@@ -59,6 +60,7 @@ app.config["SECRET_KEY"] = os.environ.get(
 )
 # Rota de cadastro de viuculos
 registrar_rotas_cadastro(app)
+registrar_rotas_anuncios(app)
 # Limita o tamanho total dos dados enviados.
 # Até 8 imagens de 5 MB, mais os dados do formulário.
 app.config["MAX_CONTENT_LENGTH"] = 42 * 1024 * 1024

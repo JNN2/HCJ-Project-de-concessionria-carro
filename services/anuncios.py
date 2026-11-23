@@ -27,6 +27,43 @@ COLUNAS = [
 ]
 
 
+def atualizar_status_anuncio(anuncio_id, usuario_id, status):
+    """Atualiza somente um anúncio pertencente ao usuário autenticado."""
+    with CAMINHO_CSV.open("r", encoding="utf-8-sig", newline="") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        colunas = leitor.fieldnames or []
+        if (len(colunas) != len(set(colunas))
+                or not {"id", "status"}.issubset(colunas)):
+            raise ValueError("Cabeçalho CSV incompatível.")
+        registros = list(leitor)
+
+    if any(None in registro or any(valor is None for valor in registro.values())
+           for registro in registros):
+        raise ValueError("Há linhas inválidas no CSV.")
+
+    encontrados = [registro for registro in registros
+                   if registro["id"] == str(anuncio_id)]
+    if not encontrados:
+        return "nao_encontrado"
+    if len(encontrados) != 1:
+        raise ValueError("Há IDs duplicados no CSV.")
+    anuncio = encontrados[0]
+    if not anuncio.get("usuario_id") or anuncio["usuario_id"] != str(usuario_id):
+        return "proibido"
+
+    anuncio["status"] = status
+    temporario = CAMINHO_CSV.with_name(f".veiculos_{uuid4().hex}.tmp")
+    try:
+        with temporario.open("w", encoding="utf-8", newline="") as arquivo:
+            escritor = csv.DictWriter(arquivo, fieldnames=colunas)
+            escritor.writeheader()
+            escritor.writerows(registros)
+        os.replace(temporario, CAMINHO_CSV)
+    finally:
+        temporario.unlink(missing_ok=True)
+    return "atualizado"
+
+
 def salvar_anuncio(anuncio):
     """
     Adiciona um novo anúncio ao CSV.
