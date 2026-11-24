@@ -1,0 +1,258 @@
+.edicao_pagina {
+    padding: 50px 20px;
+    background: var(--background);
+    min-height: 100vh;
+}
+
+.edicao_container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.edicao_header {
+    margin-bottom: 35px;
+}
+
+.edicao_header h1 {
+    font-size: 2rem;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.edicao_header h1 span {
+    color: var(--primary);
+}
+
+.edicao_header p, .edicao_descricao {
+    color: var(--text-muted);
+}
+
+.edicao_form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.edicao_secao {
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.edicao_secao h2 {
+    color: var(--text);
+    font-size: 1.25rem;
+    margin-bottom: 22px;
+    text-transform: capitalize;
+}
+
+.edicao_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.edicao_campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edicao_campo label {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.edicao_campo input, .edicao_campo textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font: inherit;
+    outline: none;
+    transition: var(--transition);
+}
+
+.edicao_campo input:focus, .edicao_campo textarea:focus {
+    border-color: var(--primary);
+}
+
+.edicao_campo textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+.edicao_fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.edicao_foto {
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.edicao_foto img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.edicao_foto_acoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+}
+
+.edicao_foto_acoes button {
+    padding: 7px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font: inherit;
+    transition: var(--transition);
+}
+
+.edicao_adicionar_fotos {
+    margin-top: 25px;
+}
+.edicao_upload {
+    display: flex;
+    min-height: 150px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 25px 20px;
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    text-align: center;
+    transition: var(--transition);
+}
+.edicao_upload:hover, .edicao_adicionar_fotos:focus-within .edicao_upload {
+    border-color: var(--primary);
+}
+.edicao_upload i {
+    font-size: 28px;
+    color: var(--primary);
+}
+.edicao_upload strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+.edicao_upload small {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+.edicao_upload span {
+    margin-top: 5px;
+    padding: 9px 18px;
+    border-radius: 7px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+.edicao_upload span:hover {
+    background: var(--primary-hover);
+}
+.edicao_adicionar_fotos input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.btn_remover {
+    background: #e10600;
+    color: #fff;
+}
+
+.btn_mover {
+    background: var(--card);
+    color: var(--text);
+}
+
+.btn_remover:hover {
+    background: #b80000;
+}
+
+.btn_mover:hover {
+    background: var(--border);
+}
+
+.edicao_acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn_cancelar,
+.btn_salvar {
+    padding: 12px 22px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn_cancelar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.btn_salvar {
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    color: #fff;
+}
+
+.btn_cancelar:hover {
+    background: var(--border);
+}
+
+.btn_salvar:hover {
+    background: var(--primary-hover);
+}
+
+@media (max-width: 700px) {
+    .edicao_pagina {
+        padding: 30px 15px;
+    }
+
+    .edicao_secao {
+        padding: 18px;
+    }
+
+    .edicao_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edicao_acoes {
+        flex-direction: column-reverse;
+    }
+
+    .btn_cancelar,
+    .btn_salvar {
+        text-align: center;
+    }
+}

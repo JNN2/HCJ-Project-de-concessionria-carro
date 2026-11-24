@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %} HCJ Motors | Editar Anúncio{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/editar_anuncio.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="edicao_pagina">
+    <div class="edicao_container">
+        <header class="edicao_header">
+            <h1>Editar <span>Anúncio</span></h1>
+            <p>Atualize as informações do seu veículo.</p>
+        </header>
+
+        <form class="edicao_form" method="POST" enctype="multipart/form-data" action="{{ url_for('editar_anuncio', id=veiculo.id) }}">
+            <div class="edicao_secao">
+                <h2>informações do veículo</h2>
+
+                <div class="edicao_grid">
+                    <div class="edicao_campo">
+                        <label for="marca">Marca</label>
+                        <input type="text" id="marca" name="marca" value="{{ veiculo.marca }}" required>
+                    </div>
+
+                    <div class="edicao_campo">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" id="modelo" name="modelo" value="{{ veiculo.modelo }} " required>
+                    </div>
+                    
+                    <div class="edicao_campo">
+                        <label for="ano">Ano</label>
+                        <input type="text" id="ano" name="ano" value="{{ veiculo.ano }} " required>
+                    </div>
+                    
+                    
+                    <div class="edicao_campo">
+                        <label for="preco">Preço</label>
+                        <input type="text" id="preco" name="preco" value="{{ veiculo.preco }} " required>
+                    </div>
+
+                    <div class="edicao_campo">
+                        <label for="quilometragem">Quilometragem</label>
+                        <input type="number" id="quilometragem" name="quilometragem" value="{{ veiculo.quilometragem }}" required>
+                    </div>
+
+                    <div class="edicao_campo">
+                        <label for="combustivel">Combustível</label>
+                        <input type="text" id="combustivel" name="combustivel" value="{{ veiculo.combustivel }}" required>
+                    </div>
+                    
+                    
+                    <div class="edicao_campo">
+                        <label for="transmissao">Transmissão</label>
+                        <input type="text" id="transmissao" name="transmissao" value="{{ veiculo.transmissao }}" required>
+                    </div>
+
+                    
+                    <div class="edicao_campo">
+                        <label for="carroceria">Carroceria</label>
+                        <input type="text" id="carroceria" name="carroceria" value="{{ veiculo.carroceria }}" required>
+                    </div>
+
+                    <div class="edicao_campo">
+                        <label for="cor">Cor</label>
+                        <input type="text" id="cor" name="cor" value="{{ veiculo.cor }}" required>
+                    </div>
+
+                    <div class="edicao_campo">
+                        <label for="localizacao">Localização</label>
+                        <input type="text" id="localizacao" name="localizacao" value="{{ veiculo.localizacao }}" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edicao_secao">
+                <h2>Descrição do anúncio</h2>
+
+                <div class="edicao_campo">
+                    <label for="descricao">Descrição</label>
+                    <textarea name="descricao" id="descricao" rows="5" required>{{ veiculo.descricao }}</textarea>
+                </div>
+            </div>
+
+            <div class="edicao_secao">
+                <h2>Fotos do veículo</h2>
+                <p class="edicao_descricao">Gerencie as fotos do seu veículo</p>
+
+                <div class="edicao_fotos">
+                        {% for foto in veiculo.imagens %}
+                            <div class="edicao_foto">
+                                <img src="{{ url_for('static', filename='images/' ~ foto) }}" alt="Foto de {{ veiculo.marca }} {{ veiculo.modelo }}">
+                                <div class="edicao_foto_acoes">
+                                <button type="button" class="btn_remover" aria-label="Remover foto">Remover</button>
+                                <button type="button" class="btn_mover" aria-label="Mover foto para a esquerda">←</button>
+                                <button type="button" class="btn_mover" aria-label="Mover foto para a direita">→</button>
+                                </div>
+                            </div>
+                    {% else %}
+                        <p>Nenhuma foto cadastrada para este veículo.</p>
+                    {% endfor %}   
+                </div>
+                <div class="edicao_adicionar_fotos">
+                    <label for="novas_fotos" class="edicao_upload">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                        <strong>Adicionar novas fotos</strong>
+                        <small>Selecione uma ou mais imagens do veículo</small>
+                        <span>Escolher arquivos</span>
+                    </label>
+                    <input type="file" id="novas_fotos" name="novas_fotos" accept="image/*" multiple>
+                </div> 
+            </div>
+
+            <div class="edicao_acoes">
+                <a href="{{ url_for('meus_anuncios') }}" class="btn_cancelar">Cancelar</a>
+                <button type="submit" class="btn_salvar">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
