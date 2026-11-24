@@ -31,21 +31,27 @@ Meus Anúncios | HCJ Motors
 
                 <div class="anuncio-info">
                     <h2>{{ anuncio.marca }} {{ anuncio.modelo }}</h2>
-
                     <p>{{ anuncio.ano }} · {{ anuncio.quilometragem }} km</p>
-
                     <strong>R$ {{ anuncio.preco }}</strong>
-
                     <span class="anuncio-status">
                         {{ anuncio.status|capitalize }}
                     </span>
-
                     <div class="anuncio-acoes">
+                        <!-- Visualizar detalhes do veículo -->
                         <a href="{{ url_for('detalhes_veiculo', id=anuncio.id) }}">
                             Ver detalhes
                         </a>
-
-                        <button type="button" class="btn-status" data-id="{{ anuncio.id }}" data-status="{{ anuncio.status }}" >
+                        <!-- Editar anúncio do veículo -->
+                        <a href="{{ url_for('editar_anuncio', id=anuncio.id) }}"
+                        class="btn-editar">
+                            <i class="fas fa-pen-to-square"></i>
+                            Editar
+                        </a>
+                        <!-- Pausar ou reativar anúncio -->
+                        <button type="button"
+                                class="btn-status"
+                                data-id="{{ anuncio.id }}"
+                                data-status="{{ anuncio.status }}">
                             {% if anuncio.status == 'ativo' %}
                                 Pausar
                             {% else %}
@@ -53,6 +59,7 @@ Meus Anúncios | HCJ Motors
                             {% endif %}
                         </button>
                     </div>
+
                 </div>
             </article>
             {% else %}

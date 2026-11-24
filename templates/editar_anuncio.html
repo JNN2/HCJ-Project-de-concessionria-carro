@@ -12,7 +12,7 @@
             <p>Atualize as informações do seu veículo.</p>
         </header>
 
-        <form class="edicao_form" method="POST" enctype="multipart/form-data" action="{{ url_for('editar_anuncio', id=veiculo.id) }}">
+        <form id="form-editar-anuncio" class="edicao_form" method="POST" enctype="multipart/form-data" action="{{ url_for('editar_anuncio', id=veiculo.id) }}" data-redirect="{{ url_for('meus_anuncios') }}" >
             <div class="edicao_secao">
                 <h2>informações do veículo</h2>
 
@@ -85,7 +85,7 @@
                 <h2>Fotos do veículo</h2>
                 <p class="edicao_descricao">Gerencie as fotos do seu veículo</p>
 
-                <div class="edicao_fotos">
+                <div class="edicao_fotos" data-foto="{{ foto }}">
                         {% for foto in veiculo.imagens %}
                             <div class="edicao_foto">
                                 <img src="{{ url_for('static', filename='images/' ~ foto) }}" alt="Foto de {{ veiculo.marca }} {{ veiculo.modelo }}">
@@ -108,6 +108,11 @@
                     </label>
                     <input type="file" id="novas_fotos" name="novas_fotos" accept="image/*" multiple>
                 </div> 
+            </div>
+            <!-- Mensagens de confirmação ou erro -->
+            <div id="edicao-mensagem"
+                role="status"
+                aria-live="polite">
             </div>
 
             <div class="edicao_acoes">
