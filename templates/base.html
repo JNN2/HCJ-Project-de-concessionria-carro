@@ -127,6 +127,10 @@
     {% if request.endpoint == 'detalhes_veiculo' %}
     <script src="{{ url_for('static', filename='js/detalhes_galeria.js') }}" defer></script>
     {% endif %}
+    <!-- JavaScript de edição de anúncios -->
+    {% if request.endpoint == 'editar_anuncio' %}
+    <script src="{{ url_for('static', filename='js/editar_anuncio.js') }}" defer></script>
+    {% endif %}
 
 </body>
 
