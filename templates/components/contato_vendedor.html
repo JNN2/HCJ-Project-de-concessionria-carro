@@ -1,0 +1,29 @@
+<!-- Componente de contato com o vendedor -->
+<section class="interesse" aria-labelledby="interesse-titulo">
+    <h2 id="interesse-titulo">Tenho interesse</h2>
+    <p> Entre em contato diretamente com o vendedor
+        para obter mais informações sobre este veículo.
+    </p>
+    <!-- Informações do vendedor -->
+    <div class="vendedor-info">
+        <div class="vendedor-icone">
+            <i class="fa-solid fa-user" aria-hidden="true"></i>
+        </div>
+        <div class="vendedor-dados">
+            <strong>Vendedor do veículo</strong>
+            <span>Anunciante</span>
+        </div>
+    </div>
+    <!-- Botão de contato pelo WhatsApp -->
+    <button type="button" id="btn-contato-vendedor" class="btn-whatsapp" data-id="{{ veiculo.id }}">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        Conversar pelo WhatsApp
+    </button>
+    <!-- Aviso de autenticação -->
+    <p class="contato-aviso">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        É necessário estar autenticado para entrar em contato.
+    </p>
+    <!-- Mensagens de erro ou confirmação -->
+    <div id="contato-mensagem" role="status" aria-live="polite"></div>
+</section>
